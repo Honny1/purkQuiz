@@ -1,4 +1,14 @@
 <?php 
+function calcScore($__AQ,$AQ,$startTime,$endTime){
+        if($__AQ==$AQ){
+            global $score,$scoreQ;
+            $score=1000+(($startTime-$endTime)/100);
+            if ($score<50) {
+                return 50;
+            }
+            return $score;
+        }
+    }
 function getScore($name){
 	include 'dbconnect.php';
 	$__AQ1="";
@@ -18,16 +28,7 @@ function getScore($name){
     	$__AQ3=$resultRow['RAQ3'];
     }
     
-    function calcScore($__AQ,$AQ,$startTime,$endTime){
-    	if($__AQ==$AQ){
-    		global $score,$scoreQ;
-    		$score=1000+(($startTime-$endTime)/100);
-    		if ($score<50) {
-    			return 50;
-    		}
-    		return $score;
-    	}
-    }
+    
 
     $userResultSql = "SELECT * FROM answers WHERE name='".$name."'";
 	$userResultQuery = mysqli_query($conn, $userResultSql);
@@ -35,13 +36,13 @@ function getScore($name){
 	if (!$userResultQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
 	while ($userResultRow = mysqli_fetch_array($userResultQuery)) {
-    	echo "<h1>".$userResultRow['name']."</h1>";
     	$score=calcScore($__AQ1,$userResultRow['AQ1'],$userResultRow['startTime'],$userResultRow['timeAQ1'])+
     		calcScore($__AQ2,$userResultRow['AQ2'],$userResultRow['timeAQ1'],$userResultRow['timeAQ2'])+
-    		calcScore($__AQ1,$userResultRow['AQ3'],$userResultRow['timeAQ2'],$userResultRow['timeAQ3']);
-    	echo "<h1>Score: ".$score."</h1>";
+    		calcScore($__AQ1,$userResultRow['AQ3'],$userResultRow['timeAQ2'],$userResultRow['timeAQ3']); 
+            return $score;	
     }
 mysqli_close($conn);
+
 }
 
 ?>
