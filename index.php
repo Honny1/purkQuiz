@@ -21,7 +21,13 @@ function getNewQuestionFromDatabase(str) {
     }
 
 function saveUserAnswers(userAnswer) {
-  userAnswers+=userAnswer+",";
+	var date = new Date();
+    var ms = date.getTime();
+    if (userAnswer!=0) {
+  	userAnswers+=userAnswer+","+ms+",";
+  }else{
+  	userAnswers+=ms+",";
+  }
 }  
 
 function saveAnswersToDatabase() {
@@ -39,12 +45,12 @@ function saveAnswersToDatabase() {
         };
         var date = new Date();
         var ms = date.getTime();
-        xmlhttp.open("GET","onlyGodKonwHowSaveUser.php?userAnswers="+ms+","+userAnswers,true);
+        xmlhttp.open("GET","onlyGodKonwHowSaveUser.php?userAnswers="+"user"+ms+","+userAnswers,true);
         xmlhttp.send();
 }
 </script>
 </head>
 <body>
-<div id="txtHint"><button value="1" onClick="getNewQuestionFromDatabase(this.value)">START</button></div>
+<div id="txtHint"><button value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0)">START</button></div>
 </body>
 </html>
