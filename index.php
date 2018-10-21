@@ -30,9 +30,9 @@ function saveUserAnswers(userAnswer) {
 	var date = new Date();
     var ms = date.getTime();
     if (userAnswer!=0) {
-  	userAnswers+=userAnswer+","+ms+",";
-  }else{
-  	userAnswers+=ms+",";
+        userAnswers+=userAnswer+","+ms+",";
+    }else{
+  	     userAnswers+=ms+",";
   }
 }  
 
@@ -54,20 +54,34 @@ function saveAnswersToDatabase() {
         xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+ms+","+userAnswers,true);
         xmlhttp.send();
 }
+
+function progressCountdown(timeleft) {
+  return new Promise((resolve, reject) => {
+    var countdownTimer = setInterval(() => {
+      timeleft--;
+
+      document.getElementById("countdown").textContent = timeleft;
+
+      if (timeleft <= 0) {
+        clearInterval(countdownTimer);
+        resolve(true);end();
+      }
+    }, 1000);
+  });
+}
+function end(){
+    document.getElementById('NaN').click();
+}
 </script>
 </head>
 <body style="background-color: transparent;">
     <center>
-        <!--HONNYho IF bude zde začínat
-        <div class="gamePin" >
-            <div style="background-color: rgba(255, 255, 255, 0.75);" class="mui-panel">
-                HONNYho IF bude zde končit-->
-                <div id="txtHint">
-                    <div class='gamePin'>
-                        <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
-                            <h1>Začít hrát</h1>
-                            <h3>Stikni tlačítko a hrej!</h3>
-                            <button class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0)">Play</button>
+        <div id="txtHint">
+            <div class='gamePin'>
+                <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
+                        <h1>Začít hrát</h1>
+                        <h3>Stikni tlačítko a hrej!</h3>
+                        <button name="buttonAnswer"class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
                         </div>
                     </div>
                 </div>

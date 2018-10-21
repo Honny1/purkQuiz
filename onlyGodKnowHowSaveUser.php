@@ -6,7 +6,7 @@
 <?php 
 include 'dbconnect.php';
 include 'getScore.php';
-
+include 'rank.php';
 $userAnswers = $_GET["userAnswers"];
 
 $userAnswersSplit = explode(",", $userAnswers);
@@ -29,7 +29,7 @@ if ($conn->query($sql) === TRUE) {
    					<h2>Score:</h2>
    						<h1>".getScore($name)."</h1>
    					<h2>umisteniAnglicky:</h2>
-   						<h1>".$umisteni." z ".$celkemUzivatelu."</h1>
+   						<h1>".$pozice." z ".$celkemUzivatelu."</h1>
 				</div>
 			</div>";
 } else {

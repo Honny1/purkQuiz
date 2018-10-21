@@ -16,13 +16,12 @@ include 'variables.php';
 
     <!-- load STYLES -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link href="/style.css" rel="stylesheet" type="text/css" />
-    <link href="/mui.css" rel="stylesheet" type="text/css" />
-    <script src="/mui.min.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="mui.css" rel="stylesheet" type="text/css" />
+    <script src="mui.min.js"></script>
     <!--SHARING-->
     <meta property="og:url" content="<?php print($_SERVER['REQUEST_URI']); ?>" />
-    <!-- Google Ads -->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-2871796742628923",
