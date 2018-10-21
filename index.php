@@ -1,5 +1,11 @@
-<html>
-<head>
+
+    <?php include "header.php" ?>
+    <title>Quiz</title>
+    <meta property="og:title" content="Quiz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://buchticka.eu/quiz/background.jpg" />
+    <meta property="og:description" content="Quiz about IT" />
+  
 <script>
 var userAnswers = "";
 
@@ -16,7 +22,7 @@ function getNewQuestionFromDatabase(str) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","onlyGodKonwHowItWorks.php?idQuestion="+str,true);
+        xmlhttp.open("GET","onlyGodKnowHowItWorks.php?idQuestion="+str,true);
         xmlhttp.send();
     }
 
@@ -45,12 +51,27 @@ function saveAnswersToDatabase() {
         };
         var date = new Date();
         var ms = date.getTime();
-        xmlhttp.open("GET","onlyGodKonwHowSaveUser.php?userAnswers="+"user"+ms+","+userAnswers,true);
+        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+ms+","+userAnswers,true);
         xmlhttp.send();
 }
 </script>
 </head>
-<body>
-<div id="txtHint"><button value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0)">START</button></div>
-</body>
-</html>
+<body style="background-color: transparent;">
+    <center>
+        <!--HONNYho IF bude zde začínat
+        <div class="gamePin" >
+            <div style="background-color: rgba(255, 255, 255, 0.75);" class="mui-panel">
+                HONNYho IF bude zde končit-->
+                <div id="txtHint">
+                    <div class='gamePin'>
+                        <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
+                            <h1>Začít hrát</h1>
+                            <h3>Stikni tlačítko a hrej!</h3>
+                            <button class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0)">Play</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+<?php include 'footer.php';

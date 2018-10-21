@@ -7,7 +7,7 @@
 include 'dbconnect.php';
 include 'getScore.php';
 
-$userAnswers=$_GET["userAnswers"];
+$userAnswers = $_GET["userAnswers"];
 
 $userAnswersSplit = explode(",", $userAnswers);
 $name = mysqli_real_escape_string($conn, $userAnswersSplit[0]);
@@ -22,8 +22,16 @@ $timeAQ3 = mysqli_real_escape_string($conn, $userAnswersSplit[7]);
 $sql = "INSERT INTO answers (name,startTime,AQ1,timeAQ1,AQ2,timeAQ2,AQ3,timeAQ3) VALUES ('$name','$startTime','$_AQ1','$timeAQ1','$_AQ2','$timeAQ2','$_AQ3','$timeAQ3')";
 
 if ($conn->query($sql) === TRUE) {
-   echo "<h1>".$name."</h1>";
-    echo "<h1>Score: ".getScore($name)."</h1>";
+	echo "	<div class='gamePin'>
+   				<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
+   					<h2>Name:</h2>
+   						<h1>".$name."</h1>
+   					<h2>Score:</h2>
+   						<h1>".getScore($name)."</h1>
+   					<h2>umisteniAnglicky:</h2>
+   						<h1>".$umisteni." z ".$celkemUzivatelu."</h1>
+				</div>
+			</div>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
