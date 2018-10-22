@@ -1,5 +1,5 @@
 <?php 
-function calcScore($__AQ,$AQ,$startTime,$endTime){
+/*function calcScore($__AQ,$AQ,$startTime,$endTime){
         if($__AQ==$AQ){
             global $score,$scoreQ;
             $score=1000+(($startTime-$endTime)/100);
@@ -8,31 +8,55 @@ function calcScore($__AQ,$AQ,$startTime,$endTime){
             }
             return $score;
         }
+    }*/
+function calcScore($startTime,$endTime){
+    //global $score, $scoreQ;
+    $score=1000+(($startTime-$endTime)/100);
+    if ($score<50){
+        return 50;
     }
+    return $score;   
+}
+
 function getScore($name){
 	include 'dbconnect.php';
-	$__AQ1="";
+    $userScore = 0;
+	/*$__AQ1="";
 	$__AQ2="";
 	$__AQ3="";
     $__AQ4="";
     $__AQ5="";
-    $__AQ6="";
+    $__AQ6="";*/
 	
 	
    
-    $resultSql = "SELECT * FROM results WHERE ID='1'";
-	$resultQuery = mysqli_query($conn, $resultSql);
+    $questionSql = "SELECT * FROM question"; //"SELECT * FROM results WHERE ID='1'";
+	$questionQuery = mysqli_query($conn, $questionSql);
 
-	if (!$resultQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+	if (!$questionQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
-	while ($resultRow = mysqli_fetch_array($resultQuery)) {
-    	$__AQ1=$resultRow['RAQ1'];
-    	$__AQ2=$resultRow['RAQ2'];
-    	$__AQ3=$resultRow['RAQ3'];
-        $__AQ4=$resultRow['RAQ4'];
-        $__AQ5=$resultRow['RAQ5'];
-        $__AQ6=$resultRow['RAQ6'];
+	while ($questionRow = mysqli_fetch_array($questionQuery)) {
+    	/*$correctAnswer = $questionRow['correct'];
+        if ($userAnswer == $correctAnswer) {*/
+            $userResultSql = "SELECT * FROM answers WHERE name='".$name."'";
+            $userResultQuery = mysqli_query($conn, $userResultSql);
+
+            if (!$userResultQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+
+            while ($userResultRow = mysqli_fetch_array($userResultQuery)) {
+                if($questionRow["correct"] == $userResultRow[sprintf('AQ%d', $questionRow["id_question"])]){
+                    # pripsat body do promene?
+                    $userScore += calcScore($userResultRow['startTime'], $userResultRow[sprintf('timeAQ%d', $questionRow["id_question"])]);//calcScore($__AQ1,$userResultRow['AQ1'],$userResultRow['startTime'],$userResultRow['timeAQ1']);
+            }}
+    	   /*$__AQ2=$resultRow['RAQ2'];
+        	$__AQ3=$resultRow['RAQ3'];
+            $__AQ4=$resultRow['RAQ4'];
+            $__AQ5=$resultRow['RAQ5'];
+            $__AQ6=$resultRow['RAQ6'];*/
+        /*}*/
     }
+        /*
+
     
     
 
@@ -49,9 +73,9 @@ function getScore($name){
             calcScore($__AQ5,$userResultRow['AQ5'],$userResultRow['timeAQ4'],$userResultRow['timeAQ5'])+
             calcScore($__AQ6,$userResultRow['AQ6'],$userResultRow['timeAQ5'],$userResultRow['timeAQ6']); 
             return $score;	
-    }
+    }*/
 mysqli_close($conn);
-
+return $userScore;
 }
 
 ?>

@@ -50,7 +50,7 @@ function saveAnswersToDatabase() {
         var date = new Date();
         var ms = date.getTime();
         var newMs= ms-1540194340000;
-        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+newMs+","+userAnswers,true);
+        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+<?php if (isset($_GET["username"])){echo "\"".$_GET['username']."\"";}else{echo "\"user\"+newMs";}?>+","+userAnswers,true);
         xmlhttp.send();
 }
 var check=true;

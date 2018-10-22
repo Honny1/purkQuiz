@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
+<?php include 'header.php'; ?>
 </head>
 <body>
 <?php 
 include 'dbconnect.php';
 
 $nextQuestion=$_GET["idQuestion"] + 1;
-if ($nextQuestion!=8) {
+if ($nextQuestion!=9) {
 if (isset($_GET["idQuestion"])) {
     $questionSql = "SELECT * FROM question WHERE id_question='".$_GET["idQuestion"]."'";
 }else{

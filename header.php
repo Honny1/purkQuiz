@@ -23,30 +23,7 @@ include 'variables.php';
     <meta property="og:url" content="quiz.buchticka.eu/<?php print($_SERVER['REQUEST_URI']); ?>" />
     <!-- STYLES -->
     <style type="text/css">
-        .gamePin{
-            width: 260px; /*30%*/
-            height: 130px; /*12%*/
-            background-color: transparent; /* green */
-
-            position: absolute; /* absolute */
-            top:    30%;
-            /*bottom: -100px;*/
-            left:   30%;
-            right:  30%;
-            margin: auto;
-        }.login{
-            width: 260px; /*30%*/
-            height: 130px; /*12%*/
-            background-color: transparent; /* green */
-
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-
-            margin: auto;
-        }.footer{
+        .footer{
             /*width: 100%; */
             background-color: rgba(255, 255, 255, 0.75); /* transparent;*/
             position: fixed;

@@ -16,19 +16,7 @@ body{
 .mui-panel{
 	background-color: rgba( 255, 255, 255, 0.85);
 }
-.dashboard{
-    width: 80%; /*30%*/
-    height: 130px; /*12%*/
-    background-color: transparent; /* green */
-
-    position: absolute;
-    top:    20%;
-    /*bottom: 0;*/
-    left:   10%;
-    right:  10%;
-
-    margin: auto;
-}
+/*  IN-GAME */
 .inGameBox{
     /*width: 80%; */
     /*height: 130px; */
@@ -41,9 +29,6 @@ body{
     right: 5%;
 
     margin: auto;
-}
-.mui-btn .mui-btn--primary .mui-btn--raised{
-    height: 100px;
 }.startStopButtton{
     font-size: 160%;
     min-width: 200px;
@@ -56,6 +41,41 @@ body{
     height: 100%;
     font-size: 200%;
     text-align: justify-all;
-}.randomShit{
-    min-width: 300px; min-height: 100px; 
+}.gamePin{
+    width: 260px; /*30%*/
+    height: 130px; /*12%*/
+    background-color: transparent; /* green */
+
+    position: absolute; /* absolute */
+    top:    30%;
+    /*bottom: -100px;*/
+    left:   30%;
+    right:  30%;
+    margin: auto;
+}
+/*  ADMIN SECTION   */
+.login{
+    width: 260px; /*30%*/
+    height: 130px; /*12%*/
+    background-color: transparent; /* green */
+
+    position: absolute;
+    top:    40%;
+    /*bottom: 0;*/
+    left:   10%;
+    right:  10%;
+
+    margin: auto;
+}.dashboardContent{
+    /*width: 80%; /*30%*/
+    /*height: 130px; /*12%*/
+    background-color: transparent; /* green */
+
+    position: absolute;
+    top:    20%;
+    /*bottom: 0;*/
+    left:   10%;
+    right:  10%;
+
+    margin: auto;
 }

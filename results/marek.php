@@ -9,7 +9,7 @@
 
     <style type="text/css">
         html{
-            background-color: black;
+            background-color: #161719;/*black*/
             background-image: none;
             color: greenyellow;
             text-align: center;
