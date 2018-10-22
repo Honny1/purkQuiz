@@ -1,1 +1,0 @@
-C:\letsencrypt-win-simple\letsencrypt.exe --accepttos --manualhost quiz.buchticka.eu --webroot C:\xampp\htdocs\quiz.buchticka.eu\ --hidehttps
