@@ -1,5 +1,5 @@
 
-    <?php include "../header.php" ?>
+    <?php include "../htmlParts/header.php" ?>
     <title>Results of Quiz</title>
     <meta http-equiv="refresh" content="5;url=./">
     <meta property="og:title" content="Results of Quiz" />
@@ -23,7 +23,8 @@
         <h1>Výsledky quizu</h1>
         <h2>Četnost odpovědí u jednostlivých otázek</h2>
         <div id="chartContainer" style="height: 370px;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <!--<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>-->
+        <script src="canvasjs.min.js"></script>
         <table class="mui-table mui-table--bordered">
             <thead>
                 <th style="text-align: center; width: 33%;">Max</th>
@@ -45,27 +46,35 @@
                     <th style="text-align: center; width: 70px;">AQ1&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                     <th style="text-align: center; width: 70px;">AQ2&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                     <th style="text-align: center; width: 70px;">AQ3&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ4&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ5&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ6&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ7&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                     <th style="text-align: center;">Time&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                 </tr>
             </thead>
             <tbody>
             <?php 
-                include '../getScore.php';
-                include '../dbconnect.php';
-                $answersSql = "SELECT * FROM answers ORDER BY ID DESC";
+                include '../calcResults/getScore.php';
+                include '../controlDatabase/dbconnect.php';
+                $answersSql = "SELECT * FROM answers ORDER BY ID DESC LIMIT 5";
                 $answersQuery = mysqli_query($conn, $answersSql);
 
                 if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
                 while ($answerRow = mysqli_fetch_array($answersQuery)) {
-                	echo "<tr>
-                    		<td>".$answerRow['name']."</td>
-                    		<td>". round(getScore($answerRow['name']))."</td>
+                    echo "<tr>
+                            <td>".$answerRow['name']."</td>
+                            <td>". round(getScore($answerRow['name']))."</td>
                             <td>".$answerRow['AQ1']."</td>
                             <td>".$answerRow['AQ2']."</td>
                             <td>".$answerRow['AQ3']."</td>
+                            <td>".$answerRow['AQ4']."</td>
+                            <td>".$answerRow['AQ5']."</td>
+                            <td>".$answerRow['AQ6']."</td>
+                            <td>".$answerRow['AQ7']."</td>
                             <td>".bcdiv(bcsub($answerRow['timeAQ3'],$answerRow['startTime']),'1000',2) ."s</td>
-                		 </tr>";
+                        </tr>";
                     }
                 mysqli_close($conn);
             ?>
@@ -340,18 +349,18 @@
                     title: "další text co vymyslí marek"
                 },
                 axisY: {
-                    title: "",
-                    titleFontColor: "#4F81BC",
-                    lineColor: "#4F81BC",
-                    labelFontColor: "#4F81BC",
-                    tickColor: "#4F81BC"
+                    title: "hovadinaY",
+                    titleFontColor: "rgba(0, 255, 0, 1)",//"#4F81BC",
+                    lineColor: "rgba(0, 255, 0, 0.1)",//"#4F81BC",
+                    labelFontColor: "rgba(0, 255, 0, 1)",//"#4F81BC",
+                    tickColor: "rgba(0, 255, 0, 1)",//"#4F81BC"
                 },
               axisY2: {
-                    title: "",
-                    titleFontColor: "#4F81BC",
-                    lineColor: "#4F81BC",
-                    labelFontColor: "#4F81BC",
-                    tickColor: "#4F81BC"
+                    title: "hovadinaX",
+                    titleFontColor: "rgba(0, 255, 0, 1)",//"#4F81BC",
+                    lineColor: "rgba(0, 255, 0, 1)",//"#4F81BC",
+                    labelFontColor: "rgba(0, 255, 0, 1)",//"#4F81BC",
+                    tickColor: "rgba(0, 255, 0, 1)",//"#4F81BC"
                 },
               
                 toolTip: {

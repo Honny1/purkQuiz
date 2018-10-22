@@ -1,4 +1,4 @@
-<?php include "header.php" ?>
+<?php include $_SERVER['DOCUMENT_ROOT']."htmlParts/header.php" ?>
 <title>Quiz</title>
 <meta property="og:title" content="Quiz" />
 <meta property="og:type" content="website" />
@@ -20,7 +20,7 @@ function getNewQuestionFromDatabase(str) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","onlyGodKnowHowItWorks.php?idQuestion="+str,true);
+        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowItWorks.php?idQuestion="+str,true);
         xmlhttp.send();
     }
 
@@ -50,7 +50,7 @@ function saveAnswersToDatabase() {
         var date = new Date();
         var ms = date.getTime();
         var newMs= ms-1540194340000;
-        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+newMs+","+userAnswers,true);
+        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowSaveUser.php?userAnswers="+<?php if (isset($_GET["username"])){echo "\"".$_GET['username']."\"";}else{echo "\"user\"+newMs";}?>+","+userAnswers,true);
         xmlhttp.send();
 }
 var check=true;
@@ -60,18 +60,21 @@ function progressCountdown(timeleft) {
     var timerId = setInterval(countdown, 1000);
 
     function countdown() {
-    if (check) {
+    if(navigator.onLine){
+        if (check) {
         if (timeleft == -1) {
-            clearTimeout(timerId);
-            end();
-            check=true;
+            clearTimeout(timerId);    
+                end();
+                check=true;
         } else {
             if (timeleft!=10) { document.getElementById("countdown").innerHTML = timeleft;}
             timeleft--;
     }}else{
         clearTimeout(timerId);
         check=true;
-    }
+    }} else {
+                alert('offline');
+            }       
 }
 
 }
@@ -90,11 +93,11 @@ function end(){
                 <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                         <h1>Začít hrát</h1>
                         <h3>Stikni tlačítko a hrej!</h3>
-                        <button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)"><!--<button style='height: 15000%;' name="buttonAnswer"class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">-->Play</button>
+                        <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </center>
-<?php include 'footer.php';
+<?php include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';
