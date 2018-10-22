@@ -2,7 +2,7 @@
 <title>Quiz</title>
 <meta property="og:title" content="Quiz" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="https://buchticka.eu/quiz/background.jpg" />
+<meta property="og:image" content="images/background.jpg" />
 <meta property="og:description" content="Quiz about IT" />  
 <script>
 var userAnswers = "";

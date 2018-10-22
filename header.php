@@ -15,10 +15,10 @@ include 'variables.php';
     <meta name="apple-mobile-web-app-status-bar-style" content="<?php print($themeColor); ?> ">
 
     <!-- load STYLES -->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link href="/styles/style.css" rel="stylesheet" type="text/css" />
-    <link href="/styles/mui.css" rel="stylesheet" type="text/css" />
-    <script src="/styles/mui.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="styles/mui.css" rel="stylesheet" type="text/css" />
+    <script src="styles/mui.min.js"></script>
     <!--SHARING-->
     <meta property="og:url" content="<?php print($_SERVER['REQUEST_URI']); ?>" />
     <!-- Google Ads -->
