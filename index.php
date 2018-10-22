@@ -49,7 +49,7 @@ function saveAnswersToDatabase() {
         };
         var date = new Date();
         var ms = date.getTime();
-        var newMs= ms-1540153340000;
+        var newMs= ms-1540194340000;
         xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+newMs+","+userAnswers,true);
         xmlhttp.send();
 }
