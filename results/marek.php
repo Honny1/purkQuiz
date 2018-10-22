@@ -11,7 +11,7 @@
         html{
             background-color: black;
             background-image: none;
-            color: green;
+            color: greenyellow;
             text-align: center;
         }
         table{
@@ -52,9 +52,12 @@
                 <tr>
                     <th style="text-align: center;">Name</th>
                     <th style="text-align: center; min-width: 110px;">Score</th>
-                    <th style="text-align: center; width: 70px;">AQ1</th> 
-                    <th style="text-align: center; width: 70px;">AQ2</th> 
-                    <th style="text-align: center; width: 70px;">AQ3</th> 
+                    <th style="text-align: center; width: 60px;">AQ1</th> 
+                    <th style="text-align: center; width: 60px;">AQ2</th> 
+                    <th style="text-align: center; width: 60px;">AQ3</th> 
+                    <th style="text-align: center; width: 60px;">AQ4</th> 
+                    <th style="text-align: center; width: 60px;">AQ5</th> 
+                    <th style="text-align: center; width: 60px;">AQ6</th> 
                     <th style="text-align: center;">Time</th> 
                 </tr>
             </thead>
@@ -74,6 +77,9 @@
                             <td>".$answerRow['AQ1']."</td>
                             <td>".$answerRow['AQ2']."</td>
                             <td>".$answerRow['AQ3']."</td>
+                            <td>".$answerRow['AQ4']."</td>
+                            <td>".$answerRow['AQ5']."</td>
+                            <td>".$answerRow['AQ6']."</td>
                             <td>".bcdiv(bcsub($answerRow['timeAQ3'],$answerRow['startTime']),'1000',2) ."s</td>
                          </tr>";
                     }
@@ -81,7 +87,6 @@
             ?>
             </tbody>
         </table>
-        <button style="display: none;" onload="sortTable(1)">MILUJU NEVIDITELNÝ TLAČÍTKA</button>
 
         <script>
             function sortTable(n) {
@@ -139,9 +144,9 @@
                     array_scores.push(Number(x[1].innerHTML.toLowerCase()));
               }
                 var sum = array_scores.reduce(function(a, b) { return a + b; }, 0);
-                document.getElementById("max").innerHTML ="MAX="+ Math.max(...array_scores);
-                document.getElementById("min").innerHTML ="MIN="+ Math.min(...array_scores);
-                document.getElementById("avg").innerHTML ="AVG="+sum/array_scores.length;
+                document.getElementById("max").innerHTML =Math.max(...array_scores);
+                document.getElementById("min").innerHTML =Math.min(...array_scores);
+                document.getElementById("avg").innerHTML =sum/array_scores.length;
 
             }
             //todo čas jak dlouho a kdy přidat do tabulky a odpovedi... a udělat gaf https://jpgraph.net/features/src/show-example.php?target=new_bar1.php
@@ -341,7 +346,12 @@
                 backgroundColor: "rgba(255, 255, 255, 0.5)",
                 title:{
                     //text: "Výsledky quizu",
-                    fontFamily: "Trebuchet MS"
+                    fontFamily: "Trebuchet MS",
+                    title: "",
+                    titleFontColor: "rgb(173,255,47)",
+                    lineColor: "rgb(173,255,47)",
+                    labelFontColor: "rgb(173,255,47)",
+                    tickColor: "rgb(173,255,47)"
                 },
                 subtitles: [{
                     //text: "Četnost odpovědí u jednostlivých otázek",
@@ -349,20 +359,25 @@
                 }], 
                 axisX: {
                     //title: "další text co vymyslí marek"
+                    title: "",
+                    titleFontColor: "rgb(173,255,47)",
+                    lineColor: "rgb(173,255,47)",
+                    labelFontColor: "rgb(173,255,47)",
+                    tickColor: "rgb(173,255,47)"
                 },
                 axisY: {
                     title: "",
-                    titleFontColor: "#4F81BC",
-                    lineColor: "#4F81BC",
-                    labelFontColor: "#4F81BC",
-                    tickColor: "#4F81BC"
+                    titleFontColor: "rgb(173,255,47)",
+                    lineColor: "rgb(173,255,47)",
+                    labelFontColor: "rgb(173,255,47)",
+                    tickColor: "rgb(173,255,47)"
                 },
               axisY2: {
                     title: "",
-                    titleFontColor: "#4F81BC",
-                    lineColor: "#4F81BC",
-                    labelFontColor: "#4F81BC",
-                    tickColor: "#4F81BC"
+                    titleFontColor: "rgb(173,255,47)",
+                    lineColor: "rgb(173,255,47)",
+                    labelFontColor: "rgb(173,255,47)",
+                    tickColor: "rgb(173,255,47)"
                 },
               
                 toolTip: {
@@ -437,6 +452,7 @@
 
             }
 
-        </script></div></div></center>
+        </script></div></div>
+        <button style="display: none;" onload="sortTable(1)">MILUJU NEVIDITELNÝ TLAČÍTKA</button></center>
 </body>
 </html>
