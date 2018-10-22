@@ -1,11 +1,9 @@
-
-    <?php include "header.php" ?>
-    <title>Quiz</title>
-    <meta property="og:title" content="Quiz" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://buchticka.eu/quiz/background.jpg" />
-    <meta property="og:description" content="Quiz about IT" />
-  
+<?php include "header.php" ?>
+<title>Quiz</title>
+<meta property="og:title" content="Quiz" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://buchticka.eu/quiz/background.jpg" />
+<meta property="og:description" content="Quiz about IT" />  
 <script>
 var userAnswers = "";
 
@@ -51,24 +49,35 @@ function saveAnswersToDatabase() {
         };
         var date = new Date();
         var ms = date.getTime();
-        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+ms+","+userAnswers,true);
+        var newMs= ms-1540153340000;
+        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+"user"+newMs+","+userAnswers,true);
         xmlhttp.send();
 }
-
+var check=true;
+var timerId;
 function progressCountdown(timeleft) {
-  return new Promise((resolve, reject) => {
-    var countdownTimer = setInterval(() => {
-      timeleft--;
+    var elem = document.getElementById('countdown');
+    var timerId = setInterval(countdown, 1000);
 
-      document.getElementById("countdown").textContent = timeleft;
-
-      if (timeleft <= 0) {
-        clearInterval(countdownTimer);
-        resolve(true);end();
-      }
-    }, 1000);
-  });
+    function countdown() {
+    if (check) {
+        if (timeleft == -1) {
+            clearTimeout(timerId);
+            end();
+            check=true;
+        } else {
+            if (timeleft!=10) { document.getElementById("countdown").innerHTML = timeleft;}
+            timeleft--;
+    }}else{
+        clearTimeout(timerId);
+        check=true;
+    }
 }
+
+}
+function stopCountdown() {
+    check=false;
+}   
 function end(){
     document.getElementById('NaN').click();
 }
@@ -81,7 +90,7 @@ function end(){
                 <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                         <h1>Začít hrát</h1>
                         <h3>Stikni tlačítko a hrej!</h3>
-                        <button name="buttonAnswer"class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
+                        <button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)"><!--<button style='height: 15000%;' name="buttonAnswer"class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">-->Play</button>
                         </div>
                     </div>
                 </div>

@@ -19,19 +19,43 @@ $questionQuery = mysqli_query($conn, $questionSql);
 if (!$questionQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
 while ($questionRow = mysqli_fetch_array($questionQuery)) {
-    echo "<h1>".$questionRow['wording']."</h1>
-    <p><span id='countdown'>10 </span> seconds</p>
-    <table style='width: 80%; ' align='center' valign='top'>
-    	<tr style='min-width: 50%; min-height: 200px; width: 50%; height: 200px; max-width: 50%; '>
-    		<td><button name='buttonAnswer' style='min-width: 300px; min-height: 150px; width: 100%; height: 100%; font-size: 200%; max-width: 600px; text-align: justify-all;' class='mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='A' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);progressCountdown(10)'>".$questionRow['answer1']."</button></td>
-    		<td><button name='buttonAnswer' style='min-width: 300px; min-height: 150px; width: 100%; height: 100%; font-size: 200%; background-color: red; color: white; max-width: 600px;' class='mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='B' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);progressCountdown(10)'>".$questionRow['answer2']."</button></td>
-    	</tr>
-    	<tr style='min-width: 50%; min-height: 200px; width: 50%; height: 200px; max-width: 50%; '>
-    		<td><button name='buttonAnswer' style='min-width: 300px; min-height: 150px; width: 600px; height: 100%; font-size: 200%; background-color: yellow; color: black; max-width: 600px;' class='mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='C' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);progressCountdown(10)'>".$questionRow['answer3']."</button></td>
-    		<td><button  name='buttonAnswer' style='min-width: 300px; min-height: 150px; width: 600px; height: 100%; font-size: 200%; background-color: black; max-width: 600px;' class='mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='D' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);progressCountdown(10)'>".$questionRow['answer4']."</button></td>
-		</tr>
-	</table>
-    <button value=" . $nextQuestion . " id='NaN'style='display: none;'onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);progressCountdown(10)'> Honyho neviditelné lahodné báječné tlačítko</button>
+    echo "
+    <div class='inGameBox'>
+        <table style='width: 90%; ' align='center' valign='top'>
+            <tr>
+                <td>
+                    <h1 style='font-size: 300%; text-align: center; '>".$questionRow['wording']."</h1>
+                </td>
+            </tr>
+            <tr align='center'>
+                <td align='center'>
+                    <table align='center'>
+                        <tr align='center' valign='top'>
+                            <td valign='left'>
+                                <h2 style='text-align: center; font-size: 200%; '>Zbývá:</h2>
+                            </td>
+                            <td valign='right'>
+                                <center><span id='countdown' style='color: red;text-align: center; font-size: 300%;'></span></center>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+        		<td><button name='buttonAnswer' style='font-size: 200%;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='A' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer1']."</button></td>
+            </tr>
+            <tr>
+        		<td><button name='buttonAnswer' style='font-size: 200%; background-color: red; color: white;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='B' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer2']."</button></td>
+        	</tr>
+        	<tr>
+        		<td><button name='buttonAnswer' style='font-size: 200%; background-color: yellow; color: black;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='C' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer3']."</button></td>
+        	</tr>
+            <tr>
+            	<td><button  name='buttonAnswer' style='font-size: 200%; background-color: black; color: white; ' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='D' onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer4']."</button></td>
+    		</tr>
+    	</table>
+        <button value=" . $nextQuestion . " id='NaN'style='display: none;'onClick='getNewQuestionFromDatabase(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'> Honyho neviditelné lahodné báječné tlačítko</button>
+    </div>
     ";
 }
 mysqli_close($conn);
@@ -40,7 +64,7 @@ mysqli_close($conn);
             	<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                     <h1>Ulož si hru!</h1>
 		         	<h3>Stikni \"Save\" a ulož svoje výsledky!</h3>
-		         	<button class='mui-btn mui-btn--primary mui-btn--raised' onClick='saveAnswersToDatabase()'>SAVE</button>
+		         	<button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' onClick='saveAnswersToDatabase()'>SAVE</button>
 	         	</div>
          	</div>";
 }

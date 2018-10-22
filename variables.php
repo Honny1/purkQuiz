@@ -1,3 +1,3 @@
 <?php
-$themeColor = "#b3ff66"; //99ff33#c7d5ed
+$themeColor = "#01e1e1"; //#b3ff66#99ff33#c7d5ed
 ?>

@@ -16,12 +16,13 @@ include 'variables.php';
 
     <!-- load STYLES -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="mui.css" rel="stylesheet" type="text/css" />
-    <script src="mui.min.js"></script>
+    <link href="/styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/mui.css" rel="stylesheet" type="text/css" />
+    <script src="/styles/mui.min.js"></script>
     <!--SHARING-->
     <meta property="og:url" content="<?php print($_SERVER['REQUEST_URI']); ?>" />
-
+    <!-- Google Ads -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-2871796742628923",
@@ -53,12 +54,15 @@ include 'variables.php';
 
             margin: auto;
         }.footer{
-            width: 100%; 
-            background-color: transparent;
+            /*width: 100%; */
+            background-color: rgba(255, 255, 255, 0.75); /* transparent;*/
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            /*top: 20%;*/
+            bottom: 0%;
+            left:  30%;
+            right: 30%;
+            -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
         }
     </style>
     
