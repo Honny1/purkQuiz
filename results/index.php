@@ -45,6 +45,10 @@
                     <th style="text-align: center; width: 70px;">AQ1&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                     <th style="text-align: center; width: 70px;">AQ2&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                     <th style="text-align: center; width: 70px;">AQ3&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ4&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ5&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ6&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
+                    <th style="text-align: center; width: 70px;">AQ7&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                     <th style="text-align: center;">Time&nbsp;<img style="cursor: pointer;" height="20px" src="../images/filter.png" onclick="sortTable(1)"></th></th> 
                 </tr>
             </thead>
@@ -64,6 +68,10 @@
                             <td>".$answerRow['AQ1']."</td>
                             <td>".$answerRow['AQ2']."</td>
                             <td>".$answerRow['AQ3']."</td>
+                            <td>".$answerRow['AQ4']."</td>
+                            <td>".$answerRow['AQ5']."</td>
+                            <td>".$answerRow['AQ6']."</td>
+                            <td>".$answerRow['AQ7']."</td>
                             <td>".bcdiv(bcsub($answerRow['timeAQ3'],$answerRow['startTime']),'1000',2) ."s</td>
                 		 </tr>";
                     }

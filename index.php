@@ -60,18 +60,21 @@ function progressCountdown(timeleft) {
     var timerId = setInterval(countdown, 1000);
 
     function countdown() {
-    if (check) {
+    if(navigator.onLine){
+        if (check) {
         if (timeleft == -1) {
-            clearTimeout(timerId);
-            end();
-            check=true;
+            clearTimeout(timerId);    
+                end();
+                check=true;
         } else {
             if (timeleft!=10) { document.getElementById("countdown").innerHTML = timeleft;}
             timeleft--;
     }}else{
         clearTimeout(timerId);
         check=true;
-    }
+    }} else {
+                alert('offline');
+            }       
 }
 
 }

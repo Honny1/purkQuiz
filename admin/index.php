@@ -14,7 +14,7 @@
 				<form class="mui-form" action="login.php">
 					<h2>Admin - Quiz</h2>
 					<div class="mui-textfield mui-textfield--float-label">
-					    <input style="width: 200px; "  type="text" name="username" id="username" required >
+					    <input style="width: 200px; "  type="text" name="username" id="username" value="<?php if(isset($_GET["username"])){echo $_GET["username"];}?>" required >
 					    <label>username</label>
 			  		</div>
 			  		<div class="mui-textfield mui-textfield--float-label">
@@ -26,4 +26,4 @@
 			</div>
 		</center>
 	</div>
-<?php include '../footer.php';
+<?php include '../footer.php';?>
