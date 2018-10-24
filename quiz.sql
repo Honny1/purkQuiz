@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Úte 23. říj 2018, 15:24
+-- Vytvořeno: Stř 24. říj 2018, 18:00
 -- Verze serveru: 10.1.28-MariaDB
 -- Verze PHP: 7.1.11
 
@@ -459,7 +459,11 @@ INSERT INTO `answers` (`ID`, `name`, `startTime`, `AQ1`, `timeAQ1`, `AQ2`, `time
 (430, 'user101481611', '1540295814093', 'D', '1540295817276', 'D', '1540295818286', 'D', '1540295819034', 'D', '1540295819425', 'D', '1540295819632', 'D', '1540295819791', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (431, 'user102857730', '1540297172621', 'B', '1540297173588', 'B', '1540297174099', 'B', '1540297174489', 'B', '1540297174898', 'B', '1540297175745', 'B', '1540297176973', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (432, 'user106296641', '1540300627071', 'A', '1540300628237', 'A', '1540300631156', 'B', '1540300632536', 'B', '1540300633436', 'B', '1540300634347', 'B', '1540300635199', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(433, 'user106296799', '1540300627071', 'A', '1540300628237', 'A', '1540300631156', 'B', '1540300632536', 'B', '1540300633436', 'B', '1540300634347', 'B', '1540300635199', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+(433, 'user106296799', '1540300627071', 'A', '1540300628237', 'A', '1540300631156', 'B', '1540300632536', 'B', '1540300633436', 'B', '1540300634347', 'B', '1540300635199', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(434, 'user116238561', '1540310566199', 'C', '1540310567157', 'D', '1540310570253', 'A', '1540310571615', 'B', '1540310572282', 'B', '1540310572788', 'A', '1540310573583', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(435, 'Buchticka', '1540368398876', 'C', '1540368399912', 'D', '1540368400651', 'A', '1540368401468', 'B', '1540368402733', 'B', '1540368403433', 'A', '1540368404327', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(436, 'PetrN', '1540368498196', 'A', '1540368504776', 'C', '1540368509318', 'A', '1540368513904', 'B', '1540368516581', 'B', '1540368523365', 'B', '1540368532390', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(437, 'user194887330', '1540389206231', 'B', '1540389207028', 'B', '1540389207702', 'B', '1540389211803', 'B', '1540389212621', 'B', '1540389222210', 'NaN', '1540389223806', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -483,7 +487,7 @@ CREATE TABLE `question` (
 
 INSERT INTO `question` (`id_question`, `wording`, `correct`, `answer1`, `answer2`, `answer3`, `answer4`) VALUES
 (1, 'Co je to čítač instrukcí?', 'C', 'HAJI [HADŽI]', 'Alkoholický nápoj<br>ve školní kantýně', 'Speciální registr v procesoru', 'Hračka pro psy'),
-(2, 'Co dělal / dělá čítač instrukcí?', 'D', 'Hraje tenis', 'Příjímá platební karty', 'Loví socky', 'Ukazuje na následující<br>operaci procesoru'),
+(2, 'Co dělá / dělal čítač instrukcí?', 'D', 'Hraje tenis', 'Příjímá platební karty', 'Loví socky', 'Ukazuje na následující<br>operaci procesoru'),
 (3, 'Co to byl shitposting?', 'A', 'MEME FB stránka z Purkyňky<br>s reálným pohledem na věc', 'Stránka se sprostými vtipy', 'FB stránka o výkalech', 'Fanstránka HAJIho'),
 (4, 'Kdo je učitel \"vypraný v Perwollu\"?', 'B', 'HAJI [HADŽI]', 'ZEMI', 'Nikdo', 'Honny'),
 (5, 'Kdo vymyslel LuckyCheese burger?', 'B', 'Někdo z Olomoucké', 'Random student z Purkyňky', 'Miloš Zeman', 'Majitel McDonalds'),
@@ -494,21 +498,21 @@ INSERT INTO `question` (`id_question`, `wording`, `correct`, `answer1`, `answer2
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `quiz`
+-- Struktura tabulky `questionset`
 --
 
-CREATE TABLE `quiz` (
-  `id_quiz` int(11) NOT NULL,
+CREATE TABLE `questionset` (
+  `id_qs` int(11) NOT NULL,
   `name` varchar(250) COLLATE utf8_czech_ci NOT NULL,
   `questions` varchar(250) COLLATE utf8_czech_ci NOT NULL,
   `admins` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 --
--- Vypisuji data pro tabulku `quiz`
+-- Vypisuji data pro tabulku `questionset`
 --
 
-INSERT INTO `quiz` (`id_quiz`, `name`, `questions`, `admins`) VALUES
+INSERT INTO `questionset` (`id_qs`, `name`, `questions`, `admins`) VALUES
 (1, 'Test pro Purkyňáky', '1,2,3', 1);
 
 -- --------------------------------------------------------
@@ -809,7 +813,32 @@ INSERT INTO `rank` (`ID`, `user_name`, `saveTime`, `score`) VALUES
 (278, 'user101481611', '1540295856251', 958),
 (279, 'user102857730', '1540297231751', 1946),
 (280, 'user106296641', '1540300671133', 1864),
-(281, 'user106296799', '1540300671292', 1864);
+(281, 'user106296799', '1540300671292', 1864),
+(282, 'user116238561', '1540310653187', 5695),
+(283, 'Buchticka', '1540368443575', 11542),
+(284, 'PetrN', '1540368588605', 2407),
+(285, 'user194887330', '1540389258896', 1776);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) COLLATE utf8_czech_ci NOT NULL,
+  `countOfActiveQuestions` int(11) NOT NULL,
+  `idOfActiveQuiz` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Vypisuji data pro tabulku `settings`
+--
+
+INSERT INTO `settings` (`id`, `name`, `countOfActiveQuestions`, `idOfActiveQuiz`) VALUES
+(1, 'uniqueQuiz', 9, 1),
+(2, 'DO NOT INSERT NEXT ROW', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -849,16 +878,22 @@ ALTER TABLE `question`
   ADD PRIMARY KEY (`id_question`);
 
 --
--- Klíče pro tabulku `quiz`
+-- Klíče pro tabulku `questionset`
 --
-ALTER TABLE `quiz`
-  ADD PRIMARY KEY (`id_quiz`);
+ALTER TABLE `questionset`
+  ADD PRIMARY KEY (`id_qs`);
 
 --
 -- Klíče pro tabulku `rank`
 --
 ALTER TABLE `rank`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Klíče pro tabulku `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Klíče pro tabulku `user`
@@ -874,7 +909,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pro tabulku `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=434;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=438;
 
 --
 -- AUTO_INCREMENT pro tabulku `question`
@@ -883,16 +918,16 @@ ALTER TABLE `question`
   MODIFY `id_question` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT pro tabulku `quiz`
+-- AUTO_INCREMENT pro tabulku `questionset`
 --
-ALTER TABLE `quiz`
-  MODIFY `id_quiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `questionset`
+  MODIFY `id_qs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pro tabulku `rank`
 --
 ALTER TABLE `rank`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
 
 --
 -- AUTO_INCREMENT pro tabulku `user`
