@@ -3,8 +3,8 @@
 	include '../header.php';
 
 	echo "
-	<title>Login - Admin Quiz</title>
-	<meta property='og:title' content='Login - Admin Quiz' />
+	<title>Create Question - Admin Quiz</title>
+	<meta property='og:title' content='Create Question - Admin Quiz' />
  	<meta property='og:type' content='website' />
 	<meta property='og:image' content='https://buchticka.eu/quiz/background.jpg' />
 	<meta property='og:description' content='Quiz about IT' />
@@ -26,7 +26,12 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 			try{
 				$questionSql = "INSERT INTO question(wording, correct, answer1, answer2, answer3, answer4) VALUES (".$_GET["wording"]."', '".$_GET["correct"]."', '".$_GET["answerA"]."',  '".$_GET["answerB"]."', '".$_GET["answerC"]."', '".$_GET["answerD"]."');";
 				$questionQuery = mysqli_query($conn, $questionSql);
-				echo "<h2>Question inserted</h2>";
+				echo "<h2>Question inserted</h2>
+						<script type='text/javascript'>
+							window.setTimeout(function() {
+								location.href = \"/admin/dashboard.php?username=".$_GET["username"]."&password=".$_GET["password"]."\";
+							}, 2000);
+						</script>";
 			}catch (Exception $e) {
 				echo $e;
 			}

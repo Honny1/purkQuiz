@@ -78,11 +78,12 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 								<th style='width: 40px; text-align: center;'>ID</th>
 								<th>Name</th>
 								<th>Questions</th>
+								<th>Edit</th>
 							</tr>
 						</thead>
 						<tbody>";
 						mysqli_query($conn, "SET NAMES 'UTF-8'");
-						$sql = 'SELECT * FROM quiz';
+						$sql = 'SELECT * FROM questionset';
 						$query = mysqli_query($conn, $sql);
 
 						if (!$query) {
@@ -90,9 +91,14 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 						}while ($row = mysqli_fetch_array($query)){
 							echo "
 							<tr>
-								<td style='text-align: center;'>".$row["id_quiz"]."</td>
+								<td style='text-align: center;'>".$row["id_qs"]."</td>
 								<td>".$row["name"]."</td>
 								<td>".$row["questions"]."</td>
+								<td><form action='editQuiz.php'>
+									<input style='display: none; ' name='username' value='".$_GET["username"]."'>
+									<input style='display: none; ' name='password' value='".$_GET["password"]."'>
+									<button type='submit' class='mui-btn mui-btn--primary mui-btn--raised'>Edit</button>
+								</form></td>
 							</tr>";
 							}echo "
 						</tbody
@@ -100,7 +106,7 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 				}elseif ($_GET["showMe"] == "results") {
 					echo "Results will be there!";
 				}elseif ($_GET["showMe"] == "addQquestion") {
-					echo "<h2>Add Question</h2> will be there!
+					echo "<h2>Add Question</h2>
 					<form action='createQuestion.php'>
 						<input name='username' value='".$_GET['username']."' style='display: none;'>
 						<input name='password' value='".$_GET['password']."' style='display: none;'>

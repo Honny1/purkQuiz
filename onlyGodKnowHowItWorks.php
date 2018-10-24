@@ -1,14 +1,18 @@
 <?php 
+    include 'dbconnect.php';
     include 'header.php';
     include 'variables.php';
 ?>
 </head>
 <body>
 <?php 
-include 'dbconnect.php';
 
 $nextQuestion=$_GET["idQuestion"] + 1;
-if ($nextQuestion!=10) {
+
+$query = mysqli_query($conn, "SELECT * FROM settings WHERE ID = '1'");
+$row = mysqli_fetch_array($query);
+
+if ($nextQuestion!=($row["countOfActiveQuestions"]+1)) {
     if (isset($_GET["idQuestion"])) {
         $questionSql = "SELECT * FROM question WHERE id_question='".$_GET["idQuestion"]."'";
     }else{
