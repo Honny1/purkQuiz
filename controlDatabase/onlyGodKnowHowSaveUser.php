@@ -5,9 +5,9 @@
 <body>
 <?php 
 include 'dbconnect.php';
-include 'getScore.php';
+include $_SERVER['DOCUMENT_ROOT'].'calcResults/getScore.php';
 include 'saveReult.php';
-include 'getRank.php';
+include $_SERVER['DOCUMENT_ROOT'].'calcResults/getRank.php';
 $userAnswers = $_GET["userAnswers"];
 
 $userAnswersSplit = explode(",", $userAnswers);

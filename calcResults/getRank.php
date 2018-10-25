@@ -1,6 +1,6 @@
 <?php
 function getRank($name){
-	include 'dbconnect.php';
+	include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
 	
 	$count=0;
  	$rankSql = "SELECT * FROM rank ORDER BY score DESC";

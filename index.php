@@ -1,4 +1,4 @@
-<?php include "header.php" ?>
+<?php include "htmlParts/header.php" ?>
 <title>Quiz</title>
 <meta property="og:title" content="Quiz" />
 <meta property="og:type" content="website" />
@@ -20,7 +20,7 @@ function getNewQuestionFromDatabase(str) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","onlyGodKnowHowItWorks.php?idQuestion="+str,true);
+        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowItWorks.php?idQuestion="+str,true);
         xmlhttp.send();
     }
 
@@ -50,7 +50,7 @@ function saveAnswersToDatabase() {
         var date = new Date();
         var ms = date.getTime();
         var newMs= ms-1540194340000;
-        xmlhttp.open("GET","onlyGodKnowHowSaveUser.php?userAnswers="+<?php if (isset($_GET["username"])){echo "\"".$_GET['username']."\"";}else{echo "\"user\"+newMs";}?>+","+userAnswers,true);
+        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowSaveUser.php?userAnswers="+<?php if (isset($_GET["username"])){echo "\"".$_GET['username']."\"";}else{echo "\"user\"+newMs";}?>+","+userAnswers,true);
         xmlhttp.send();
 }
 var check=true;
@@ -100,4 +100,4 @@ function end(){
             </div>
         </div>
     </center>
-<?php include 'footer.php';
+<?php include 'htmlParts/footer.php';

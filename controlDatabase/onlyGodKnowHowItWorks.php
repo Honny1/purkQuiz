@@ -1,7 +1,6 @@
 <?php 
     include 'dbconnect.php';
-    include 'header.php';
-    include 'variables.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/globalVar/variables.php';
 ?>
 </head>
 <body>
@@ -69,7 +68,7 @@ if ($nextQuestion!=($row["countOfActiveQuestions"]+1)) {
             	<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                     <h1>Ulož si hru!</h1>
 		         	<h3>Stikni \"Save\" a ulož svoje výsledky!</h3>
-		         	<button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' onClick='saveAnswersToDatabase()'>SAVE</button>
+		         	<button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' onClick='stopCountdown();saveAnswersToDatabase()'>SAVE</button>
 	         	</div>
          	</div>";
 }

@@ -19,7 +19,7 @@ function calcScore($startTime,$endTime){
 }
 
 function getScore($name){
-	include 'dbconnect.php';
+	include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
     $userScore = 0;
 	/*$__AQ1="";
 	$__AQ2="";
