@@ -1,1 +1,10 @@
 ﻿include $_SERVER['DOCUMENT_ROOT'].'globalVar/variables.php';
+				   calcResults/getScore.php
+				   calcResults/getRank.php
+				   controlDatabase/dbconnect.php
+				   controlDatabase/onlyGodKnowHowItWorks.php
+				   controlDatabase/onlyGodKnowHowSaveUser.php
+				   controlDatabase/saveResult.php
+				   fonts/TrebuchetMS.ttf
+				   htmlParts/header.php
+				   htmlParts/footer.php
