@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
 <?php 
 include 'dbconnect.php';
 include $_SERVER['DOCUMENT_ROOT'].'calcResults/getScore.php';
@@ -44,5 +39,3 @@ if ($conn->query($sql) === TRUE) {
 }
 mysqli_close($conn);
 ?>
-</body>
-</html>

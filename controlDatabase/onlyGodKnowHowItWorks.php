@@ -73,5 +73,3 @@ if ($nextQuestion!=($row["countOfActiveQuestions"]+1)) {
          	</div>";
 }
 ?>
-</body>
-</html>
