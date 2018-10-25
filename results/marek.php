@@ -63,8 +63,9 @@
             </thead>
             <tbody>
             <?php 
-                include '../getScore.php';
-                include '../dbconnect.php';
+                include $_SERVER['DOCUMENT_ROOT'].'/calcResults/getScore.php';
+                                                    
+                include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
                 $answersSql = "SELECT * FROM answers ORDER BY ID DESC";
                 $answersQuery = mysqli_query($conn, $answersSql);
 

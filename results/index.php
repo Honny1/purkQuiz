@@ -1,5 +1,5 @@
 
-    <?php include "../header.php" ?>
+    <?php include "../htmlParts/header.php" ?>
     <title>Results of Quiz</title>
     <meta http-equiv="refresh" content="5;url=./">
     <meta property="og:title" content="Results of Quiz" />
@@ -54,8 +54,8 @@
             </thead>
             <tbody>
             <?php 
-                include '../getScore.php';
-                include '../dbconnect.php';
+                include '../calcResults/getScore.php';
+                include '../controlDatabase/dbconnect.php';
                 $answersSql = "SELECT * FROM answers ORDER BY ID DESC";
                 $answersQuery = mysqli_query($conn, $answersSql);
 
