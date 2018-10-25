@@ -78,7 +78,14 @@ function getAvg($maxScore,$count){
   <script>
   new Chart(document.getElementById("graf"),{
     "type":"line",
-    "data":{"labels":["now","-1h","-2h","-3h","-4h","-5h","-6h","-7h","-8h"],
+    "data":{"labels":["now",
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-3600000)/ 1000)."'";?>,
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-7200000)/ 1000)."'";?>,
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-10800000)/ 1000)."'";?>,
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-14400000)/ 1000)."'";?>,
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-18000000)/ 1000)."'";?>,
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-21600000)/ 1000)."'";?>,
+    <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-25200000)/ 1000)."'";?>,],
     "datasets":[{"label":"success over time",
     "data":[<?php echo getData();?>],
     "fill":false,
