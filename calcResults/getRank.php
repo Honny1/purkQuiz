@@ -1,4 +1,5 @@
 <?php
+//return your global position 
 function getRank($name){
 	include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
 	

@@ -93,7 +93,7 @@ function end(){
                 <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                         <h1>Začít hrát</h1>
                         <h3>Stikni tlačítko a hrej!</h3>
-                        <button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)"><!--<button style='height: 15000%;' name="buttonAnswer"class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">-->Play</button>
+                        <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)"><!--<button style='height: 15000%;' name="buttonAnswer"class='mui-btn mui-btn--primary mui-btn--raised' value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">-->Play</button>
                         </div>
                     </div>
                 </div>

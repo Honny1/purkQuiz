@@ -1,4 +1,5 @@
 <?php 
+//save user ansvers to db and evaluate score and rank
 include 'dbconnect.php';
 include $_SERVER['DOCUMENT_ROOT'].'calcResults/getScore.php';
 include 'saveReult.php';

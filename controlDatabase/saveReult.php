@@ -1,4 +1,5 @@
 <?php
+//save name, score and time to table rank for calulate user global position 
 function saveToRank($name,$score){
 	include 'dbconnect.php';
 	

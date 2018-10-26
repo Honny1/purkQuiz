@@ -1,11 +1,11 @@
-<?php 
+<?php
+//return questions to web  
     include 'dbconnect.php';
     include $_SERVER['DOCUMENT_ROOT'].'/globalVar/variables.php';
 ?>
 </head>
 <body>
 <?php 
-
 $nextQuestion=$_GET["idQuestion"] + 1;
 
 $query = mysqli_query($conn, "SELECT * FROM settings WHERE ID = '1'");
@@ -102,16 +102,16 @@ if ($nextQuestion!=($row["countOfActiveQuestions"]+1-$row["autoSave"])) {
                     	</td>
                 	</tr>
                 	<tr>
-            			<td><button name='buttonAnswer' style='font-size: 200%;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='A' onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer1']."</button></td>
+            			<td><button name='buttonAnswer' id='A' style='font-size: 200%;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer1']."</button></td>
                 	</tr>
                 	<tr>
-            			<td><button name='buttonAnswer' style='font-size: 200%; background-color: red; color: white;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='B' onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer2']."</button></td>
+            			<td><button name='buttonAnswer' id='B' style='font-size: 200%; background-color: red; color: white;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer2']."</button></td>
             		</tr>
             		<tr>
-            			<td><button name='buttonAnswer' style='font-size: 200%; background-color: yellow; color: black;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='C' onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer3']."</button></td>
+            			<td><button name='buttonAnswer' id='C' style='font-size: 200%; background-color: yellow; color: black;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer3']."</button></td>
             		</tr>
                 	<tr>
-                		<td><button  name='buttonAnswer' style='font-size: 200%; background-color: black; color: white; ' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " id='D' onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer4']."</button></td>
+                		<td><button name='buttonAnswer' id='D' style='font-size: 200%; background-color: black; color: white; ' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $nextQuestion . " onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>".$questionRow['answer4']."</button></td>
         			</tr>
         		</table>
             	<button value=" . $nextQuestion . " id='NaN'style='display: none;'onClick='saveUserAnswers(this.id);stopCountdown();saveAnswersToDatabase()'>if countdown==0 auto press this button</button>
@@ -123,7 +123,7 @@ if ($nextQuestion!=($row["countOfActiveQuestions"]+1-$row["autoSave"])) {
             	<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                     <h1>Ulož si hru!</h1>
 		         	<h3>Stikni \"Save\" a ulož svoje výsledky!</h3>
-		         	<button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' onClick='stopCountdown();saveAnswersToDatabase()'>SAVE</button>
+		         	<button style='font-size: 160%;' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' onClick='stopCountdown();saveAnswersToDatabase()' id='saveMyShit'>SAVE</button>
 	         	</div>
          	</div>";
          }
