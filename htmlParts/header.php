@@ -21,18 +21,4 @@ include $_SERVER['DOCUMENT_ROOT'].'globalVar/variables.php';
     <script src="/styles/mui.min.js"></script>
     <!-- SHARING -->
     <meta property="og:url" content="quiz.buchticka.eu/<?php print($_SERVER['REQUEST_URI']); ?>" />
-    <!-- STYLES -->
-    <style type="text/css">
-        .footer{
-            /*width: 100%; */
-            background-color: rgba(255, 255, 255, 0.75); /* transparent;*/
-            position: fixed;
-            /*top: 20%;*/
-            bottom: 0%;
-            left:  30%;
-            right: 30%;
-            -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
-        }
-    </style>
     

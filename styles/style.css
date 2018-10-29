@@ -9,12 +9,23 @@ html{
     background-height: auto;
 }
 body{
-	background-color: transparent;
-	font-family: Trebuchet MS;
-	/*min-width: 600px;*/
+    background-color: transparent;
+    font-family: Trebuchet MS;
+    /*min-width: 600px;*/
 }
 .mui-panel{
-	background-color: rgba( 255, 255, 255, 0.85);
+    background-color: rgba( 255, 255, 255, 0.85);
+}
+.footer{
+    /*width: 100%; */
+    background-color: rgba(255, 255, 255, 0.75); /* transparent;*/
+    position: fixed;
+    /*top: 20%;*/
+    bottom: 0%;
+    left:  30%;
+    right: 30%;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
 }
 /*  IN-GAME */
 .inGameBox{
