@@ -17,16 +17,23 @@ body{
     background-color: rgba( 255, 255, 255, 0.85);
 }
 .footer{
-    /*width: 100%; */
-    background-color: rgba(255, 255, 255, 0.75); /* transparent;*/
+    min-width: 275px;
+    min-height: 65px;
+    width:100%;
+    /*background:#999;*/
+    background-color: rgba(255, 255, 255, 0.8); /* transparent;*/
     position: fixed;
     /*top: 20%;*/
     bottom: 0%;
-    left:  30%;
-    right: 30%;
+    left:  0%;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
 }
+
+.footer .footer-content {
+    margin: auto;
+}
+
 /*  IN-GAME */
 .inGameBox{
     /*width: 80%; */

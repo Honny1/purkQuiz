@@ -1,10 +1,13 @@
 <?php echo "
 	<center>
-		<div style='min-width: 275px; min-height: 65px;' align='center' class='footer mui-container'>
-			<p style='text-align: center; border: none; padding:0%;'>
-				<br>
-				Copyright &copy; 2018<br>
-				<a href='https://buchticka.eu'>Buchticka.eu</a> Team</p>
+		<div align='center' class='footer'>
+            <div class='footer-content'>
+                <p style='text-align: center; border: none; padding:0%;'>
+				    <br>
+				    Copyright &copy; 2018<br>
+				    <strong><a href='https://buchticka.eu'>Buchticka.eu</a> Team</strong>
+                </p>
+            </div>
 		</div>
 	</center>
 </body>
