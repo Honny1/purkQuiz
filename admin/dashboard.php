@@ -16,6 +16,7 @@
 			<div style='position: absolute; top: 20px; left: 30%; right: 30%; background-color: rgba(255, 255, 255, 0.75); padding: 0px;' class='mui-panel'>
 				<h1 style='margin: none; padding-top: 0px; border: none;'>Dashboard</h1>
 			</div>
+<<<<<<< HEAD
 			
 			<div style='position: absolute; top: 105px; left: 30%; right: 30%; background-color: transparent; margin-bottom: 200px; '>
 				<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
@@ -30,6 +31,17 @@
 				</div>
 			</div>
 				<div style='background-color: rgba(255, 255, 255, 0.75); top: 200px; min-width: 920px; align: center;' class='dashboardContent mui-panel' align='center'>
+=======
+			<div style='position: absolute; top: 105px; left: 30%; right: 30%; background-color: green; margin-bottom: 200px; '>
+				<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
+					<a href='dashboard.php?showMe=questions'><button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Questions</button></a>
+					<a href='dashboard.php?showMe=quizs'>	<button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Quizs</button></a>
+					<a href='dashboard.php?showMe=results'><button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Results</button></a>
+					<a href='dashboard.php?showMe=addQquestion'><button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Add Question</button></a>
+				</div>
+				<!--<br>-->
+				<div style='background-color: rgba(255, 255, 255, 0.75);' class='dashboardContent mui-panel' >
+>>>>>>> 5e1e5ed3d91b9ee2a36449686de9c155d430f74b
 	";
 	if (isset($_POST["username"]) and isset($_POST["password"])) {
 		//header("Content-Type: text/html;charset=UTF-8");
@@ -51,6 +63,7 @@
 									<th style='text-align: center; width: 40px; '>ID</th>
 									<th>Wording</th>
 									<th style='width: 40px; text-align: center;'>Correct</th>
+<<<<<<< HEAD
 									<th style='min-width: 150px; '>A</th>
 									<th style='min-width: 150px; '>B</th>
 									<th style='min-width: 150px; '>C</th>
@@ -59,6 +72,12 @@
 									<th>B - Answer2</th>
 									<th>C - Answer3</th>
 									<th>D - Answer4</th>-->
+=======
+									<th>A - Answer1</th>
+									<th>B - Answer2</th>
+									<th>C - Answer3</th>
+									<th>D - Answer4</th>
+>>>>>>> 5e1e5ed3d91b9ee2a36449686de9c155d430f74b
 								</tr>
 							</thead>
 							<tbody>";
@@ -119,7 +138,11 @@
 						echo "Results will be there!";
 					}elseif ($_POST["showMe"] == "addQquestion") {
 						echo "<h2>Add Question</h2>
+<<<<<<< HEAD
 						<form action='createQuestion.php' method='POST'>
+=======
+						<form action='createQuestion.php'>
+>>>>>>> 5e1e5ed3d91b9ee2a36449686de9c155d430f74b
 							<input name='username' value='".$_POST['username']."' style='display: none;'>
 							<input name='password' value='".$_POST['password']."' style='display: none;'>
 							<div class='mui-textfield  mui-textfield--float-label'>
