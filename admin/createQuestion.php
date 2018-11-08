@@ -1,7 +1,7 @@
 <?php
-	include '../dbconnect.php';
-	include '../header.php';
-
+	include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
+	include $_SERVER['DOCUMENT_ROOT'].'htmlParts/header.php';
+	
 	echo "
 	<title>Create Question - Admin Quiz</title>
 	<meta property='og:title' content='Create Question - Admin Quiz' />
@@ -14,7 +14,7 @@
 	<div class='login' >
 		<center>
 			<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>\n";
-if (isset($_GET["username"]) and isset($_GET["password"])) {
+if (isset($_POST["username"]) and isset($_POST["password"])) {
 	mysqli_query($conn, "SET NAMES 'UTF-8'");
 	$sql = "SELECT username, password, nick FROM user";
 	$query = mysqli_query($conn, $sql);
@@ -22,14 +22,19 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 	if (!$query) {
 		die ('SQL Error: ' . mysqli_error($conn));
 	}while ($row = mysqli_fetch_array($query)){
-		if ($_GET["username"] == $row["username"] and $_GET["password"] == $row["password"]){
+		if ($_POST["username"] == $row["username"] and $_POST["password"] == $row["password"]){
 			try{
-				$questionSql = "INSERT INTO question(wording, correct, answer1, answer2, answer3, answer4) VALUES (".$_GET["wording"]."', '".$_GET["correct"]."', '".$_GET["answerA"]."',  '".$_GET["answerB"]."', '".$_GET["answerC"]."', '".$_GET["answerD"]."');";
+				$questionSql = "INSERT INTO question(wording, correct, answer1, answer2, answer3, answer4) VALUES (".$_POST["wording"]."', '".$_POST["correct"]."', '".$_POST["answerA"]."',  '".$_POST["answerB"]."', '".$_POST["answerC"]."', '".$_POST["answerD"]."');";
 				$questionQuery = mysqli_query($conn, $questionSql);
 				echo "<h2>Question inserted</h2>
+						<form action='dashboard.php' method='POST'>
+							<input style='display: none; ' name='username' value='".$_POST["username"]."'>
+							<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+							<input type='submit' id='goToDashboard'>
+						</form>
 						<script type='text/javascript'>
 							window.setTimeout(function() {
-								location.href = \"/admin/dashboard.php?username=".$_GET["username"]."&password=".$_GET["password"]."\";
+								location.href = \"/admin/dashboard.php?username=".$_POST["username"]."&password=".$_POST["password"]."\";
 							}, 2000);
 						</script>";
 			}catch (Exception $e) {
@@ -37,10 +42,10 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 			}
 		}else{
 		echo "<h2>Bad credentials, try it again better!</h2>
-				<a style='display: none;' href='./?username=".$_GET["username"]."'></a>
+				<a style='display: none;' href='./?username=".$_POST["username"]."'></a>
 				<script type='text/javascript'>
 					window.setTimeout(function() {
-						location.href = \"/admin/?username=".$_GET["username"]."\";
+						location.href = \"/admin/?username=".$_POST["username"]."\";
 					}, 2000);
 				</script>
 				";
@@ -57,6 +62,8 @@ if (isset($_GET["username"]) and isset($_GET["password"])) {
 echo "		</div>
 		</center>
 	</div>";
+
 /*S1f0n */
-include '../footer.php';
+include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
+include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';
 ?>

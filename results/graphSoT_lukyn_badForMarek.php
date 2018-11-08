@@ -26,6 +26,83 @@
 
   //include $_SERVER['DOCUMENT_ROOT'].'htmlParts/header.php';
   //
+  function getDataTime(){
+    // this method return data for graph
+    include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
+    $date0 =round(microtime(true) * 1000)- 3600000;
+    $date1 =round(microtime(true) * 1000)- 7200000;
+    $date2 =round(microtime(true) * 1000)-10800000;
+    $date3 =round(microtime(true) * 1000)-14400000;
+    $date4 =round(microtime(true) * 1000)-18000000;
+    $date5 =round(microtime(true) * 1000)-21600000;
+    $date6 =round(microtime(true) * 1000)-25200000;
+    $date7 =round(microtime(true) * 1000)-28800000;
+
+    $maxScore0=0;
+    $count0=0;
+    $maxScore1=0;
+    $count1=0;
+    $maxScore2=0;
+    $count2=0;
+    $maxScore3=0;
+    $count3=0;
+    $maxScore4=0;
+    $count4=0;
+    $maxScore5=0;
+    $count5=0;
+    $maxScore6=0;
+    $count6=0;
+    $maxScore7=0;
+    $count7=0;
+
+/*    $totalTimeScoreQuery = mysqli_query($conn, "SELECT `timeAQ".(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)."` FROM answers");
+    if (!$totalTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+    $startTimeScoreQuery = mysqli_query($conn, "SELECT `startTime` FROM answers");
+    if (!$startTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+    
+    echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);*/
+    $answersSql = "SELECT * FROM answers";
+    $answersQuery = mysqli_query($conn, $answersSql);
+    if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+
+    while ($answerRow = mysqli_fetch_array($answersQuery)) {
+        if ($date0<=$answerRow['startTime']) {
+          $maxScore0 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count0+=1;
+        }else if ($date1<=bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)) {
+          $maxScore1 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count1+=1;
+        }else if ($date2 <= $answerRow["startTime"]) {
+          $maxScore2 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count2+=1;
+        }else if ($date3 <= $answerRow["startTime"]) {
+          $maxScore3 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count3+=1;
+        }else if ($date4 <= $answerRow["startTime"]) {
+          $maxScore4 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count4+=1;
+        } else if ($date5 <= $answerRow["startTime"]) {
+          $maxScore5 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count5+=1;
+        } else if ($date6 <= $answerRow["startTime"]) {
+          $maxScore6 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count6+=1;
+        } else if ($date7 <= $answerRow["startTime"]) {
+          $maxScore7 += bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2);
+          $count7+=1;
+        }  
+      }
+    mysqli_close($conn);
+    return  ($maxScore7*10).",".
+            ($maxScore6*10).",".
+            ($maxScore5*10).",".
+            ($maxScore4*10).",".
+            ($maxScore3*10).",".
+            ($maxScore2*10).",".
+            ($maxScore1*10).",".
+            ($maxScore0*10);
+  }
+
   function getData(){
     // this method return data for graph
     include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
@@ -129,10 +206,19 @@
         "fill":false,
         "borderColor":"rgba(173,255,47, 1)",
         //"borderWidth": 1,
-        "backgroundColor":"rgba(173,255,47, 1)",
-        "lineTension":0.1}
+        "backgroundColor":"rgba(173,255,47, 0.6)",
+        "lineTension":0.1,
+      },{
+        label:"**Delay of voting**",
+        /*data:[3500, 6000, 3000, 4000, 5000, 8000],*/
+        data:[<?php echo getDataTime();?>],
+        fill:false,
+        borderColor:"rgba(255,  80,  80, 1)",
+        //"borderWidth": 1,
+        backgroundColor:"rgba(255,  80,  80, 0.6)",
+        lineTension:0.1},
         ]},
-      "options":{
+      options:{
         responsive: true,
         title: {
             display: true,
@@ -142,13 +228,13 @@
             fontSize: 30,
         },
         legend: {
-            display: false,
+            display: true,
             position: "bottom",
             labels: {
-                fontColor: 'rgb(0, 255, 0)',
+                fontColor: 'rgba(173,255,47, 0.8)',
                 fontFamily: "Trebuchet MS",
-                fontSize: 20,
-              }
+                fontSize: 14,
+              },
             },
         scales: {
           xAxes: [{
@@ -171,9 +257,9 @@
         }
       }],*/
           yAxes: [{
-            afterUpdate: function(scaleInstance) {
+            /*afterUpdate: function(scaleInstance) {
               console.dir(scaleInstance);
-            },
+            },*/
             ticks: {
               fontColor: 'rgba(173,255,47, 1)',
               /*min: -2,

@@ -1,5 +1,5 @@
 
-	<?php include "../header.php" ?>
+	<?php include $_SERVER['DOCUMENT_ROOT']."htmlParts/header.php"; ?>
 	<title>Admin - Quiz</title>
 	<meta property="og:title" content="Admin - Quiz" />
 	<meta property="og:type" content="website" />
@@ -11,7 +11,7 @@
 	<div class="login" >
 		<center>
 			<div style="background-color: rgba(255, 255, 255, 0.75);" class="mui-panel">
-				<form class="mui-form" action="login.php">
+				<form class="mui-form" action="login.php" method="POST">
 					<h2>Admin - Quiz</h2>
 					<div class="mui-textfield mui-textfield--float-label">
 					    <input style="width: 200px; "  type="text" name="username" id="username" value="<?php if(isset($_GET["username"])){echo $_GET["username"];}?>" required >
@@ -26,4 +26,4 @@
 			</div>
 		</center>
 	</div>
-<?php include '../footer.php';?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';?>

@@ -3,7 +3,7 @@
 <head scrolling="no">
     <?php //include "../header.php" ?>
     <title>Results of Quiz</title>
-    <meta http-equiv="refresh" content="15;url=./marek.php">
+    <meta http-equiv="refresh" content="20;url=./marek.php">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://quiz.buchticka.eu/images/background.jpg" />
@@ -223,33 +223,11 @@
                             <th style="text-align: center; width: 60px;">AQ6</th> 
                             <th style="text-align: center; width: 60px;">AQ7</th> 
                             <th style="text-align: center; width: 60px;">AQ8</th>-->
-                           <!-- <th style="text-align: center;">Time</th> -->
+                            <th style="text-align: center;">Time</th> 
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
-                        include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
-                        /*$questionsSql = "SELECT * FROM question ORDER BY score DESC LIMIT 10";
-                        $questionsQuery = mysqli_query($conn, $questionsSql);
-                        if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-                        $correctAnswers = array();
-                        while ($questionRow = mysqli_fetch_array($questionsQuery)) {
-                             array_push($correctAnswers, $questionRow["correct"]);
-                        }*/
-                        
-                        $answersSql = "SELECT * FROM rank ORDER BY score DESC LIMIT 10";
-                        $answersQuery = mysqli_query($conn, $answersSql);
-                        if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-
-                        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
-                        while ($answerRow = mysqli_fetch_array($answersQuery)) {
-                            echo "<tr>
-                                    <td>".$answerRow['user_name']."</td>
-                                    <td>".$answerRow['score']."</td>
-                                 </tr>";
-                            }
-                        mysqli_close($conn);
-                    /*
                         include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
@@ -278,7 +256,7 @@
                                         )."s</td>
                                  </tr>";
                             }
-                        mysqli_close($conn);*/
+                        mysqli_close($conn);
                     ?>
                     </tbody>
                 </table>

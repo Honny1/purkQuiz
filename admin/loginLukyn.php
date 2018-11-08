@@ -26,7 +26,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 		if ($_POST["username"] == $row["username"] and $_POST["password"] == $row["password"]) {
 			echo "	<h2>Login successful!</h2>
 				  	<p>Hi ".$row["nick"]."!</p>
-				  	<form action='".$row["afterLogonGoTo"]."' method='POST'>
+				  	<form action='".$row["afterLogonGoTo"]."' >
 				  		<input style='display: none;' type='text' name='username' value='".$_POST["username"]."'>
 				  		<input style='display: none;' type='password' name='password' value='".$_POST["password"]."'>
 				  		<input style='display: none;' type='submit' id='submitForm'>
@@ -34,7 +34,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 					<script type='text/javascript'>
 						window.setTimeout(function() {
 							//location.href = \"dashboard.php\";
-							document.getElementById('submitForm').click();
+							document.getElementById('".$row["submitForm"]."').click();
 						}, 2000);
 					</script>";
 		}else{
@@ -42,7 +42,8 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 					<a style='display: none;' href='./?username=".$_POST["username"]."'></a>
 					<script type='text/javascript'>
 						window.setTimeout(function() {
-							location.href = \"./?username=".$_POST["username"]."\";
+							#location.href = \"/admin/?username=".$_POST["username"]."\";
+							document.getElementById('ID_Tlačítka').click();
 						}, 2000);
 					</script>
 					";
@@ -52,7 +53,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 	echo "<h2>Username and password weren't inserted!</h2>
 			<script type='text/javascript'>
 				window.setTimeout(function() {
-					location.href = \"./\";
+					location.href = \"/admin/\";
 				}, 2000);
 			</script>";
 }
