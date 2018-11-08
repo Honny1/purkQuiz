@@ -200,7 +200,7 @@
                                     <td>".$answerRow['AQ6']."</td>
                                     <td>".$answerRow['AQ7']."</td>
                                     <td>".$answerRow['AQ8']."</td>-->
-                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)."s</td>
+                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)." s</td>
                                  </tr>";
                             }
                         mysqli_close($conn);
@@ -223,7 +223,7 @@
                             <th style="text-align: center; width: 60px;">AQ6</th> 
                             <th style="text-align: center; width: 60px;">AQ7</th> 
                             <th style="text-align: center; width: 60px;">AQ8</th>-->
-                           <!-- <th style="text-align: center;">Time</th> -->
+                           <th style="text-align: center;">Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -246,6 +246,8 @@
                             echo "<tr>
                                     <td>".$answerRow['user_name']."</td>
                                     <td>".$answerRow['score']."</td>
+                                    <td>".floor(((float)$answerRow['solutionTime'] /1000)/60)." s</td>
+                                    <!--<td>".bcdiv($answerRow['solutionTime'],'1000',2)." s</td>-->
                                  </tr>";
                             }
                         mysqli_close($conn);

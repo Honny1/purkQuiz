@@ -15,9 +15,9 @@ include $_SERVER['DOCUMENT_ROOT'].'globalVar/variables.php';
     <meta name="apple-mobile-web-app-status-bar-style" content="<?php print($themeColor); ?> ">
 
     <!-- load STYLES -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link href="/styles/style.css" rel="stylesheet" type="text/css" />
-    <link href="/styles/mui.css" rel="stylesheet" type="text/css" />
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/styles/style.css"   rel="stylesheet"    type="text/css" />
+    <link href="/styles/mui.css"     rel="stylesheet"    type="text/css" />
     <script src="/styles/mui.min.js"></script>
     <!-- SHARING -->
     <meta property="og:url" content="quiz.buchticka.eu/<?php print($_SERVER['REQUEST_URI']); ?>" />

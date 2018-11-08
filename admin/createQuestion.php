@@ -16,7 +16,7 @@
 			<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>\n";
 if (isset($_POST["username"]) and isset($_POST["password"])) {
 	mysqli_query($conn, "SET NAMES 'UTF-8'");
-	$sql = "SELECT username, password, nick FROM user";
+	$sql = "SELECT * FROM user";
 	$query = mysqli_query($conn, $sql);
 
 	if (!$query) {
@@ -24,42 +24,35 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 	}while ($row = mysqli_fetch_array($query)){
 		if ($_POST["username"] == $row["username"] and $_POST["password"] == $row["password"]){
 			try{
-				$questionSql = "INSERT INTO question(wording, correct, answer1, answer2, answer3, answer4) VALUES (".$_POST["wording"]."', '".$_POST["correct"]."', '".$_POST["answerA"]."',  '".$_POST["answerB"]."', '".$_POST["answerC"]."', '".$_POST["answerD"]."');";
+				$questionSql = "INSERT INTO question(`wording`, `correct`, `answer1`, `answer2`, `answer3`, `answer4`) VALUES ('".$_POST["wording"]."', '".$_POST["correct"]."', '".$_POST["answerA"]."',  '".$_POST["answerB"]."', '".$_POST["answerC"]."', '".$_POST["answerD"]."');";
 				$questionQuery = mysqli_query($conn, $questionSql);
+				if (!$questionQuery) {echo "Something went wrong";}
 				echo "<h2>Question inserted</h2>
-						<form action='dashboard.php' method='POST'>
-							<input style='display: none; ' name='username' value='".$_POST["username"]."'>
-							<input style='display: none; ' name='password' value='".$_POST["password"]."'>
-							<input type='submit' id='goToDashboard'>
-						</form>
-						<script type='text/javascript'>
-							window.setTimeout(function() {
-								location.href = \"/admin/dashboard.php?username=".$_POST["username"]."&password=".$_POST["password"]."\";
-							}, 2000);
-						</script>";
+					  <form action='dashboard.php' method='POST'>";
 			}catch (Exception $e) {
 				echo $e;
 			}
 		}else{
 		echo "<h2>Bad credentials, try it again better!</h2>
-				<a style='display: none;' href='./?username=".$_POST["username"]."'></a>
-				<script type='text/javascript'>
-					window.setTimeout(function() {
-						location.href = \"/admin/?username=".$_POST["username"]."\";
-					}, 2000);
-				</script>
+			 <form action='/admin' method='POST'>
 				";
 		}
 	}
 }else{
 	echo "<h2>Username and password weren't inserted!</h2>
-			<script type='text/javascript'>
-				window.setTimeout(function() {
-					location.href = \"/admin/\";
-				}, 2000);
-			</script>";
+		 <form action='/admin' method='POST'>";
 }
-echo "		</div>
+	echo "		<form action='dashboard.php' method='POST'>
+					<input style='display: none; ' name='username' value='".$_POST["username"]."'>
+					<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+					<input type='submit' value='OK' id='goToDashboard' class='mui-btn'>
+				</form>
+				<script type='text/javascript'>
+					window.setTimeout(function() {
+						document.getElementById('goToDashboard').click();
+					}, 2000);
+				</script>
+			</div>
 		</center>
 	</div>";
 

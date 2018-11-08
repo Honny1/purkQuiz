@@ -1,6 +1,6 @@
 <?php
 //return questions to web  
-    include 'dbconnect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
     include $_SERVER['DOCUMENT_ROOT'].'/globalVar/variables.php';
 ?>
 </head>
@@ -39,7 +39,7 @@ if ($nextQuestion!=($row["countOfActiveQuestions"]+1-$row["autoSave"])) {
                                     <h2 style='text-align: center; font-size: 200%; '>Zbývá:</h2>
                                 </td>
                                 <td valign='right'>
-                                    <center><span id='countdown' style='color: red;text-align: center; font-size: 300%;'></span></center>
+                                    <center><span id='countdown' style='color: red;text-align: center; font-size: 300%;'>10</span></center>
                                 </td>
                             </tr>
                         </table>
@@ -95,7 +95,7 @@ if ($nextQuestion!=($row["countOfActiveQuestions"]+1-$row["autoSave"])) {
                                     	<h2 style='text-align: center; font-size: 200%; '>Zbývá:</h2>
                                 	</td>
                                 	<td valign='right'>
-                                    	<center><span id='countdown' style='color: red;text-align: center; font-size: 300%;'></span></center>
+                                    	<center><span id='countdown' style='color: red;text-align: center; font-size: 300%;'>10</span></center>
                                 	</td>
                             	</tr>
                         	</table>

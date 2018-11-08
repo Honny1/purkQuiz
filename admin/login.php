@@ -11,7 +11,7 @@
   
 </head>
 <body style='background-color: transparent;'>
-	<div class='login' >
+	<div style='max-width: 260px; ' class='login' >
 		<center>
 			<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>\n";
 if (isset($_POST["username"]) and isset($_POST["password"])) {
@@ -25,7 +25,8 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 	}while ($row = mysqli_fetch_array($query)){
 		if ($_POST["username"] == $row["username"] and $_POST["password"] == $row["password"]) {
 			echo "	<h2>Login successful!</h2>
-				  	<p>Hi ".$row["nick"]."!</p>
+				  	<h3>Hi ".$row["nick"]."!</h3>
+				  	<p>Redirecting to Dashboard!</p>
 				  	<form action='".$row["afterLogonGoTo"]."' method='POST'>
 				  		<input style='display: none;' type='text' name='username' value='".$_POST["username"]."'>
 				  		<input style='display: none;' type='password' name='password' value='".$_POST["password"]."'>

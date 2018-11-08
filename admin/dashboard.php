@@ -13,35 +13,24 @@
 	</head>
 	<body style='background-color: transparent;'>
 		<center>
-			<div style='position: absolute; top: 20px; left: 30%; right: 30%; background-color: rgba(255, 255, 255, 0.75); padding: 0px;' class='mui-panel'>
+			<div style='position: absolute; top: 20px; left: 25%; right: 25%; background-color: rgba(255, 255, 255, 0.75); padding: 0px;' class='mui-panel'>
 				<h1 style='margin: none; padding-top: 0px; border: none;'>Dashboard</h1>
 			</div>
-<<<<<<< HEAD
 			
-			<div style='position: absolute; top: 105px; left: 30%; right: 30%; background-color: transparent; margin-bottom: 200px; '>
+			<div style='position: absolute; top: 105px; left: 25%; right: 25%; background-color: transparent; margin-bottom: 200px; '>
 				<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
 					<form action='dashboard.php' method='POST'>
 						<input style='display: none; ' name='username' value='".$_POST["username"]."'>
 						<input style='display: none; ' name='password' value='".$_POST["password"]."'>
 						<button name='showMe' value='questions' type='submit' style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Questions</button>
-						<button name='showMe' value='quizs' type='submit' style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Quizs</button>
+						<button name='showMe' value='quenstionssets' type='submit' style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Question Sets</button>
 						<button name='showMe' value='results' type='submit' style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Results</button>
 						<button name='showMe' value='addQquestion' type='submit' style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Add Question</button>
+						<button name='showMe' value='settings' type='submit' style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Settings</button>
 					</form>
 				</div>
 			</div>
 				<div style='background-color: rgba(255, 255, 255, 0.75); top: 200px; min-width: 920px; align: center;' class='dashboardContent mui-panel' align='center'>
-=======
-			<div style='position: absolute; top: 105px; left: 30%; right: 30%; background-color: green; margin-bottom: 200px; '>
-				<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
-					<a href='dashboard.php?showMe=questions'><button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Questions</button></a>
-					<a href='dashboard.php?showMe=quizs'>	<button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Quizs</button></a>
-					<a href='dashboard.php?showMe=results'><button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Results</button></a>
-					<a href='dashboard.php?showMe=addQquestion'><button style='font-size: 110%;' class='mui-btn mui-btn--primary mui-btn--raised'>Add Question</button></a>
-				</div>
-				<!--<br>-->
-				<div style='background-color: rgba(255, 255, 255, 0.75);' class='dashboardContent mui-panel' >
->>>>>>> 5e1e5ed3d91b9ee2a36449686de9c155d430f74b
 	";
 	if (isset($_POST["username"]) and isset($_POST["password"])) {
 		//header("Content-Type: text/html;charset=UTF-8");
@@ -63,7 +52,6 @@
 									<th style='text-align: center; width: 40px; '>ID</th>
 									<th>Wording</th>
 									<th style='width: 40px; text-align: center;'>Correct</th>
-<<<<<<< HEAD
 									<th style='min-width: 150px; '>A</th>
 									<th style='min-width: 150px; '>B</th>
 									<th style='min-width: 150px; '>C</th>
@@ -72,12 +60,6 @@
 									<th>B - Answer2</th>
 									<th>C - Answer3</th>
 									<th>D - Answer4</th>-->
-=======
-									<th>A - Answer1</th>
-									<th>B - Answer2</th>
-									<th>C - Answer3</th>
-									<th>D - Answer4</th>
->>>>>>> 5e1e5ed3d91b9ee2a36449686de9c155d430f74b
 								</tr>
 							</thead>
 							<tbody>";
@@ -100,8 +82,8 @@
 								}echo "
 							</tbody
 						</table>";
-					}elseif ($_POST["showMe"] == "quizs") {
-						echo "<h2>Quizs</h2>
+					}elseif ($_POST["showMe"] == "quenstionssets") {
+						echo "<h2>Quenstions Sets</h2>
 
 						<table class='mui-table mui-table--bordered'>
 							<thead>
@@ -125,9 +107,12 @@
 									<td style='text-align: center;'>".$row["id_qs"]."</td>
 									<td>".$row["name"]."</td>
 									<td>".$row["questions"]."</td>
-									<td><form action='editQuiz.php'>
+									<td><form action='editQuestionsSets.php' method='POST'>
 										<input style='display: none; ' name='username' value='".$_POST["username"]."'>
 										<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+										<input style='display: none; ' name='oldName' value='".$row["name"]."'>
+										<input style='display: none; ' name='oldQuestions' value='".$row["questions"]."'>
+										<input style='display: none; ' name='id' value='".$row["id_qs"]."'>
 										<button type='submit' class='mui-btn mui-btn--primary mui-btn--raised'>Edit</button>
 									</form></td>
 								</tr>";
@@ -135,14 +120,62 @@
 							</tbody
 						</table>";
 					}elseif ($_POST["showMe"] == "results") {
-						echo "Results will be there!";
+						echo "
+						<h2>Redirecting...</h2>
+							<script type='text/javascript'>
+								window.setTimeout(function() {
+									location.href = \"/results\";
+								}, 1000);
+							</script>";
+					}elseif ($_POST["showMe"] == "settings") {
+						echo "<h2>Settings</h2>";
+						mysqli_query($conn, "SET NAMES 'UTF-8'");
+						$sql = 'SELECT * FROM settings WHERE id = 1';
+						$query = mysqli_query($conn, $sql);
+
+						if (!$query) {
+							die ('SQL Error: ' . mysqli_error($conn));
+						}while ($row = mysqli_fetch_array($query)){
+							echo "
+							<form action='changeSettings.php' method='POST'>
+								<table class='mui-table mui-table--bordered'>
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Value</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Count of active questions</td>
+											<!--<td>".$row["countOfActiveQuestions"]."</td>-->
+											<td>
+												<div class='mui-textfield  mui-textfield--float-label'>
+											    	<input type='text' name='countOfActiveQuestions' required value='".$row["countOfActiveQuestions"]."'>
+											    	<label style='text-align: left; '>Set new value <b style='color: red; '>*</b></label>
+											  	</div>
+										  	</td>
+										</tr>
+										<tr>
+											<td>ID of active question set</td>
+											<!--<td>".$row["idOfActiveQuestionSet"]."</td>-->
+											<td>
+												<div class='mui-textfield  mui-textfield--float-label'>
+											    	<input type='text' name='idOfActiveQuestionSet' required value='".$row["idOfActiveQuestionSet"]."'>
+											    	<label style='text-align: left; '>Set new value <b style='color: red; '>*</b></label>
+											  	</div>
+										  	</td>
+										</tr>
+									</tbody>
+								</table>
+								<input style='display: none; ' name='username' value='".$_POST["username"]."'>
+								<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+								<button type='submit' class='mui-btn mui-btn--primary mui-btn--raised'>Update</button>
+							</form>";
+							}
 					}elseif ($_POST["showMe"] == "addQquestion") {
 						echo "<h2>Add Question</h2>
-<<<<<<< HEAD
 						<form action='createQuestion.php' method='POST'>
-=======
-						<form action='createQuestion.php'>
->>>>>>> 5e1e5ed3d91b9ee2a36449686de9c155d430f74b
 							<input name='username' value='".$_POST['username']."' style='display: none;'>
 							<input name='password' value='".$_POST['password']."' style='display: none;'>
 							<div class='mui-textfield  mui-textfield--float-label'>
@@ -179,6 +212,7 @@
 					}
 				}else{
 					echo "
+						<h2>Redirecting...</h2>
 						<form action='dashboard.php' method='POST'>
 					  		<input style='display: none;' type='text' name='showMe' value='questions'>
 					  		<input style='display: none;' type='text' name='username' value='".$_POST["username"]."'>
