@@ -18,6 +18,6 @@ function getSolutionTime($name){
     }
     mysqli_close($conn);
     
-    return $time/1000;
+    return $time;
 }
 ?>

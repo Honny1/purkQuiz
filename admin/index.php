@@ -3,7 +3,7 @@
 	<title>Admin - Quiz</title>
 	<meta property="og:title" content="Admin - Quiz" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="https://buchticka.eu/quiz/background.jpg" />
+	<meta property="og:image" content="https://quiz.buchticka.eu/images/background.jpg" />
 	<meta property="og:description" content="Admin - Quiz about IT" />
   
 </head>

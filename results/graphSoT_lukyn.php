@@ -3,6 +3,7 @@
 <head>
   <title>Success over Time - Quiz graph</title>
   <style type="text/css">
+    @font-face{font-family: Trebuchet MS; src: url('/fonts/TrebuchetMS.ttf');}
     html{
       width: 100%;
       height: 100%;
@@ -25,19 +26,19 @@
   <?php 
 
   //include $_SERVER['DOCUMENT_ROOT'].'htmlParts/header.php';
-  //
+
   function getData(){
     // this method return data for graph
     include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
 
-    $date0 =round(microtime(true) * 1000)- 3600000;
-    $date1 =round(microtime(true) * 1000)- 7200000;
-    $date2 =round(microtime(true) * 1000)-10800000;
-    $date3 =round(microtime(true) * 1000)-14400000;
-    $date4 =round(microtime(true) * 1000)-18000000;
-    $date5 =round(microtime(true) * 1000)-21600000;
-    $date6 =round(microtime(true) * 1000)-25200000;
-    $date7 =round(microtime(true) * 1000)-28800000;
+    $date0 =round(microtime(true) * 1000) - 900000;
+    $date1 =round(microtime(true) * 1000) - (900000*2);
+    $date2 =round(microtime(true) * 1000) - (900000*3);
+    $date3 =round(microtime(true) * 1000) - (900000*4);
+    $date4 =round(microtime(true) * 1000) - (900000*5);
+    $date5 =round(microtime(true) * 1000) - (900000*6);
+    $date6 =round(microtime(true) * 1000) - (900000*7);
+    $date7 =round(microtime(true) * 1000) - (900000*8);
 
     $maxScore0=0;
     $count0=0;
@@ -115,21 +116,24 @@
     new Chart(document.getElementById("graph"),{
       "type":"line",
       "data":{"labels":[
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-25200000)/ 1000)."'";?>,
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-21600000)/ 1000)."'";?>,
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-18000000)/ 1000)."'";?>,
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-14400000)/ 1000)."'";?>,
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)-10800000)/ 1000)."'";?>,
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)- 7200000)/ 1000)."'";?>,
-        <?php echo "'".date("H:i:s",(round(microtime(true) * 1000)- 3600000)/ 1000)."'";?>,
-        "now",],
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - (900000*7))/ 1000)."'";?>,
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - (900000*6))/ 1000)."'";?>,
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - (900000*5))/ 1000)."'";?>,
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - (900000*4))/ 1000)."'";?>,
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - (900000*3))/ 1000)."'";?>,
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - (900000*2))/ 1000)."'";?>,
+        //<?php echo "'".date("H:i",(round(microtime(true) * 1000) - 900000)/ 1000)."'";?>,
+        <?php echo "'".date("H:i",(round(microtime(true) * 1000) - 900000)/ 1000)."'";?>,
+        "now"],
       "datasets":[{
         "label":"Success over Time",
         "data":[<?php echo getData();?>],
         "fill":false,
-        "borderColor":"rgba(173,255,47, 1)",
+        //"borderColor":"rgba(173,255,47, 1)",
+        "borderColor":"rgba(132, 186,  91, 1)",
         //"borderWidth": 1,
-        "backgroundColor":"rgba(173,255,47, 1)",
+        //"backgroundColor":"rgba(173,255,47, 1)",
+        "backgroundColor":"rgba(132, 186,  91, 0.4)",
         "lineTension":0.1}
         ]},
       "options":{
@@ -142,12 +146,12 @@
             fontSize: 30,
         },
         legend: {
-            display: false,
+            display: true,
             position: "bottom",
             labels: {
-                fontColor: 'rgb(0, 255, 0)',
+                fontColor: 'rgba(173,255,47, 0.8)',
                 fontFamily: "Trebuchet MS",
-                fontSize: 20,
+                fontSize: 14,
               }
             },
         scales: {
@@ -194,10 +198,12 @@
         yScaleID: 'y-axis-0',
         //yMin:  1,
         //yMax: 4,
-        borderColor: 'rgba(0, 255, 0, 0.25)',
+        //borderColor: 'rgba(0, 255, 0, 0.25)',
+        borderColor: 'rgba(132, 186,  91, 1)',
         //borderWidth: 2,
         //backgroundColor: 'rgba(255, 51, 51, 0.25)',
-        backgroundColor: 'rgba(0, 255, 0, 1.25)',
+        //backgroundColor: 'rgba(0, 255, 0, 1.25)',
+        backgroundColor: 'rgba(132, 186,  91, 0.2)',
       }],
     }
   }

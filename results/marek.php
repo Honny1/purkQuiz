@@ -12,6 +12,7 @@
 
     <style type="text/css">
         html{
+            overflow:hidden;
             background-color: #2e3136; /*#161719;/*black*/
             background-image: none;
             color: rgba(173,255,47, 0.8); /*greenyellow;*/
@@ -114,18 +115,21 @@
             </td>
         </tr>
     </table>
+    <!--<h2>Score statistics</h2>-->
     <table class="mui-table mui-table--bordered">
         <thead>
-            <th style="text-align: center; width: 25%;">Max</th>
-            <th style="text-align: center; width: 25%;">Min</th>
-            <th style="text-align: center; width: 25%;">Avg</th>
-            <th style="text-align: center; width: 25%;">Total time</th>
+            <th style="text-align: center; width: 25%;">Maximal score</th>
+            <th style="text-align: center; width: 25%;">Minimal score</th>
+            <th style="text-align: center; width: 25%;">Average score</th>
+            <th style="text-align: center; width: 25%;">Average time</th>
+            <!--<th style="text-align: center; width: 25%;">Total time</th>-->
         </thead>
         <tbody>
             <td id="max"></td>
             <td id="min"></td>
             <td id="avg"></td>
-            <td id="totalTime"></td>
+            <td id="avgTime"></td>
+            <!--<td id="totalTime"></td>-->
         </tbody>
     </table>
     <table style="width: 100%;">
@@ -246,8 +250,8 @@
                             echo "<tr>
                                     <td>".$answerRow['user_name']."</td>
                                     <td>".$answerRow['score']."</td>
-                                    <td>".floor(((float)$answerRow['solutionTime'] /1000)/60)." s</td>
-                                    <!--<td>".bcdiv($answerRow['solutionTime'],'1000',2)." s</td>-->
+                                    <!--<td>".floor(((float)$answerRow['solutionTime'] /1000)/60)." s</td>-->
+                                    <td>".bcdiv($answerRow['solutionTime'],'1000',2)." s</td>
                                  </tr>";
                             }
                         mysqli_close($conn);
@@ -350,14 +354,21 @@
                 if (!$avgScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
                 print_r(mysqli_fetch_array($avgScoreQuery)[0]);
             ?>";
+            document.getElementById("avgTime").innerHTML = "<?php
+                $avgScoreQuery = mysqli_query($conn, "SELECT AVG(`solutionTime`) FROM rank");
+                if (!$avgScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                //print_r(date("h:m:s", bcdiv(mysqli_fetch_array($avgScoreQuery)[0]),'1000',2));
+                echo bcdiv(mysqli_fetch_array($avgScoreQuery)[0],'1000',2).' s';
+            ?>";
             document.getElementById("totalTime").innerHTML  = "<?php
                 $totalTimeScoreQuery = mysqli_query($conn, "SELECT SUM(`timeAQ".(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)."`) FROM answers");
                 if (!$totalTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
                 $startTimeScoreQuery = mysqli_query($conn, "SELECT SUM(`startTime`) FROM answers");
                 if (!$startTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-                echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);
+                //echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);
+                echo date("h:m:s", bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2))." s";
                 mysqli_close($conn);
-            ?>s";
+            ?>";
 
         }
         window.onload = function () {

@@ -3,6 +3,7 @@
 <head>
   <title>Frequency of Responses - Quiz graph</title>
   <style type="text/css">
+    @font-face{font-family: Trebuchet MS; src: url('/fonts/TrebuchetMS.ttf');}
     html{
       width: 100%;
       height: 100%;
