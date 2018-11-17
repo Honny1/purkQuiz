@@ -1,8 +1,8 @@
 <?php
 //return questions to web  
-    include $_SERVER['DOCUMENT_ROOT'].'/htmlParts/header.php';
-    include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
-    include $_SERVER['DOCUMENT_ROOT'].'/globalVar/variables.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/globalVar/variables.php';
     ?>
     <title>Prepare DB for Day D - Quiz</title>
     <meta property="og:title" content="Prepare DB for Day D - Quiz" />
@@ -22,7 +22,7 @@
                     if (!$deleteRankQuery) {die ('<h2>SQL Error: </h2><p>' . mysqli_error($conn).'</p>');}
                     echo "<h2>Successfully prepared!</h2>";
 
-                    include $_SERVER['DOCUMENT_ROOT'].'/htmlParts/footer.php';
+                    include realpath($_SERVER['DOCUMENT_ROOT']).'//htmlParts/footer.php';
                 ?>
             </div>
         </center>

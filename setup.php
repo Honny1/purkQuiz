@@ -1,5 +1,5 @@
 
-    <?php include $_SERVER['DOCUMENT_ROOT']."htmlParts/header.php"; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/htmlParts/header.php'; ?>
     <title>Setup page - Quiz</title>
     <meta property="og:title" content="Setup page - Quiz" />
     <meta property="og:type" content="website" />
@@ -15,7 +15,7 @@
                 <h2>Setup of Quiz</h2>
                 <?php
                     try{
-                        require_once $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
+                        require_once realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
                         echo "  <div style='background-color: rgba(240, 255, 220, 0.75); '>
                                     <h3 style='color: limegreen; '>Successfully connected to database!</h3>
                                     <p  style='color: limegreen; '>Table named `".$dbname."` is already existing.</p>
@@ -46,4 +46,4 @@
             </div>
         </center>
     </div>
-<?php include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';?>
+<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';?>

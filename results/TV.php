@@ -3,10 +3,10 @@
 <head scrolling="no">
     <?php //include "../header.php" ?>
     <title>Results of Quiz</title>
-    <meta http-equiv="refresh" content="15;url=./marek.php">
+    <meta http-equiv="refresh" content="15;url=./TV.php">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://quiz.buchticka.eu/images/background.jpg" />
+    <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
     <meta property="og:description" content="Results of Quiz about IT" />
     <link rel="stylesheet" type="text/css" href="/styles/style.css">
 
@@ -154,9 +154,9 @@
                     </thead>
                     <tbody>
                     <?php 
-                        include $_SERVER['DOCUMENT_ROOT'].'/calcResults/getScore.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
                                                             
-                        include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
@@ -232,7 +232,7 @@
                     </thead>
                     <tbody>
                     <?php 
-                        include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
                         /*$questionsSql = "SELECT * FROM question ORDER BY score DESC LIMIT 10";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
@@ -256,7 +256,7 @@
                             }
                         mysqli_close($conn);
                     /*
-                        include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbconnect.php';
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
@@ -338,7 +338,7 @@
         }
 
         function getStatisticTable() {
-            <?php include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php'; ?>
+            <?php include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php'; ?>
             document.getElementById("max").innerHTML =  "<?php
                 $maxScoreQuery = mysqli_query($conn, "SELECT MAX(`score`) FROM rank");
                 if (!$maxScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
