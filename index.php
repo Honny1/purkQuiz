@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT']."htmlParts/header.php" ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/htmlParts/header.php' ?>
 <title>Quiz</title>
 <meta property="og:title" content="Quiz" />
 <meta property="og:type" content="website" />

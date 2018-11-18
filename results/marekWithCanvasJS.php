@@ -122,9 +122,9 @@
             </thead>
             <tbody>
             <?php 
-                include realpath($_SERVER['DOCUMENT_ROOT']).'//calcResults/getScore.php';
+                include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
                                                     
-                include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbconnect.php';
+                include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
                 $answersSql = "SELECT * FROM answers ORDER BY ID DESC LIMIT 20";
                 $answersQuery = mysqli_query($conn, $answersSql);
 

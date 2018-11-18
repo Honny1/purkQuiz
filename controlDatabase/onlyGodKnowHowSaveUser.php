@@ -1,6 +1,6 @@
 <?php 
 //save user ansvers to db and evaluate and return score and rank on web
-  include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+  include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
   include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
   include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/saveResult.php';
   include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getRank.php';
