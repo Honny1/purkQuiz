@@ -1,5 +1,5 @@
 
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/htmlParts/header.php'; ?>
+    <?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php'; ?>
     <title>Setup page - Quiz</title>
     <meta property="og:title" content="Setup page - Quiz" />
     <meta property="og:type" content="website" />
