@@ -3,5 +3,5 @@ dbconnect.php
 /_______________lukynuvQUIZ
 /__lukynuvQuiz
 /hony
-controlDatabase/dbConnect.php
-setup/dbCredentials.php
+dbConnect.php
+dbCredentials.php
