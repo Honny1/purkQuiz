@@ -27,8 +27,11 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 				$questionSql = "INSERT INTO question(`wording`, `correct`, `answer1`, `answer2`, `answer3`, `answer4`) VALUES ('".$_POST["wording"]."', '".$_POST["correct"]."', '".$_POST["answerA"]."',  '".$_POST["answerB"]."', '".$_POST["answerC"]."', '".$_POST["answerD"]."');";
 				$questionQuery = mysqli_query($conn, $questionSql);
 				if (!$questionQuery) {echo "Something went wrong";}
-				echo "<h2>Question inserted</h2>
-					  <form action='dashboard.php' method='POST'>";
+				echo "	<h2>Question inserted</h2>
+					 	<form action='dashboard.php' method='POST'>
+							<input style='display: none; ' name='username' value='".$_POST["username"]."'>
+							<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+							<input style='display: none; ' name='showMe' value='addQquestion'>";
 			}catch (Exception $e) {
 				echo $e;
 			}
@@ -43,8 +46,6 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 		 <form action='/admin' method='POST'>";
 }
 	echo "		<form action='dashboard.php' method='POST'>
-					<input style='display: none; ' name='username' value='".$_POST["username"]."'>
-					<input style='display: none; ' name='password' value='".$_POST["password"]."'>
 					<input type='submit' value='OK' id='goToDashboard' class='mui-btn'>
 				</form>
 				<script type='text/javascript'>

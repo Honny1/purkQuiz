@@ -17,7 +17,7 @@
 				<h1 style='margin: none; padding-top: 0px; border: none;'>Dashboard</h1>
 			</div>
 			
-			<div style='position: absolute; top: 105px; left: 25%; right: 25%; background-color: transparent; margin-bottom: 200px; '>
+			<div style='position: absolute; top: 105px; left: 20%; right: 20%; background-color: transparent; margin-bottom: 200px; '>
 				<div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
 					<form action='dashboard.php' method='POST'>
 						<input style='display: none; ' name='username' value='".$_POST["username"]."'>
@@ -107,7 +107,7 @@
 									<td style='text-align: center;'>".$row["id_qs"]."</td>
 									<td>".$row["name"]."</td>
 									<td>".$row["questions"]."</td>
-									<td><form action='editQuestionsSets.php' method='POST'>
+									<td><form action='manageQuestionsSets.php' method='POST'>
 										<input style='display: none; ' name='username' value='".$_POST["username"]."'>
 										<input style='display: none; ' name='password' value='".$_POST["password"]."'>
 										<input style='display: none; ' name='oldName' value='".$row["name"]."'>
@@ -117,6 +117,29 @@
 									</form></td>
 								</tr>";
 								}echo "
+								<tr>
+									<form action='manageQuestionsSets.php' method='POST'>
+										<td style='text-align: center;'>X</td>
+										<td>
+											<div class='mui-textfield  mui-textfield--float-label'>
+												<input type='text' name='newName' required>
+												<label style='text-align: left; '>Set name of new question set <b style='color: red; '>*</b></label>
+											</div>
+										</td>
+										<td>
+											<div class='mui-textfield  mui-textfield--float-label'>
+												<input type='text' name='newQuestions' required>
+												<label style='text-align: left; '>Input list of questions <b style='color: red; '>*</b> Separated by \", \"</label>
+											</div>
+										</td>
+										<td>
+											<input style='display: none; ' name='username' value='".$_POST["username"]."'>
+											<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+											<button type='submit' class='mui-btn mui-btn--primary mui-btn--raised'>Add</button>
+										</td>
+									</form>
+								</tr>";
+								echo "
 							</tbody
 						</table>";
 					}elseif ($_POST["showMe"] == "results") {
@@ -151,10 +174,10 @@
 											<!--<td>".$row["countOfActiveQuestions"]."</td>-->
 											<td>
 												<div class='mui-textfield  mui-textfield--float-label'>
-											    	<input type='text' name='countOfActiveQuestions' required value='".$row["countOfActiveQuestions"]."'>
-											    	<label style='text-align: left; '>Set new value <b style='color: red; '>*</b></label>
-											  	</div>
-										  	</td>
+													<input type='text' name='countOfActiveQuestions' required value='".$row["countOfActiveQuestions"]."'>
+													<label style='text-align: left; '>Set new value <b style='color: red; '>*</b></label>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td>ID of active question set</td>

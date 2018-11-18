@@ -56,7 +56,7 @@ function saveAnswersToDatabase() {
                     echo "\"".$_GET['username']."\"";
                 }else{
                     //echo "\"user\"+newMs";
-                    echo "\"User\"";
+                    echo "\"Player\"";
                 }
             ?> + "," + userAnswers,true);
         xmlhttp.send();
