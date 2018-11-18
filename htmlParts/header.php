@@ -1,5 +1,5 @@
  <?php
-include $_SERVER['DOCUMENT_ROOT'].'globalVar/variables.php';
+include realpath($_SERVER['DOCUMENT_ROOT']).'/globalVar/variables.php';
 ?>
 <!doctype html>
 <html>

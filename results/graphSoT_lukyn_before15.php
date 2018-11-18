@@ -24,11 +24,11 @@
 <body>
   <?php 
 
-  //include $_SERVER['DOCUMENT_ROOT'].'htmlParts/header.php';
+  //include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
   //
   function getData(){
     // this method return data for graph
-    include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
 
     $date0 =round(microtime(true) * 1000)- 3600000;
     $date1 =round(microtime(true) * 1000)- 7200000;

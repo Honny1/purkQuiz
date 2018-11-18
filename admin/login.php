@@ -1,6 +1,6 @@
 <?php
-	include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
-	include $_SERVER['DOCUMENT_ROOT'].'htmlParts/header.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
 
 	echo "
 	<title>Login - Admin Quiz</title>
@@ -61,5 +61,5 @@ echo "		</div>
 		</center>
 	</div>";
 /*S1f0n */
-include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';
+include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';
 ?>

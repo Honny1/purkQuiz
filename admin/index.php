@@ -26,4 +26,4 @@
 			</div>
 		</center>
 	</div>
-<?php include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';?>
+<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';?>

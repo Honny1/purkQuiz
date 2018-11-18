@@ -150,9 +150,9 @@
                     </thead>
                     <tbody>
                     <?php 
-                        include $_SERVER['DOCUMENT_ROOT'].'/calcResults/getScore.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'//calcResults/getScore.php';
                                                             
-                        include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbconnect.php';
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
@@ -228,7 +228,7 @@
                     </thead>
                     <tbody>
                     <?php 
-                        include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php';
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbconnect.php';
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
@@ -310,7 +310,7 @@
         }
 
         function getStatisticTable() {
-            <?php include $_SERVER['DOCUMENT_ROOT'].'/controlDatabase/dbconnect.php'; ?>
+            <?php include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbconnect.php'; ?>
             document.getElementById("max").innerHTML =  "<?php
                 $maxScoreQuery = mysqli_query($conn, "SELECT MAX(`score`) FROM rank");
                 if (!$maxScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}

@@ -1,6 +1,6 @@
 <?php
-	include $_SERVER['DOCUMENT_ROOT'].'controlDatabase/dbconnect.php';
-	include $_SERVER['DOCUMENT_ROOT'].'htmlParts/header.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
 	//include 'login.php';
 
 	echo "
@@ -264,7 +264,7 @@
 			</div>
 		</center>";
 
-	include $_SERVER['DOCUMENT_ROOT'].'htmlParts/footer.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';
 ?>
 </body>
 </html>
