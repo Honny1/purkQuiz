@@ -20,5 +20,5 @@ include $_SERVER['DOCUMENT_ROOT'].'globalVar/variables.php';
     <link href="/styles/mui.css"     rel="stylesheet"    type="text/css" />
     <script src="/styles/mui.min.js"></script>
     <!-- SHARING -->
-    <meta property="og:url" content="quiz.buchticka.eu/<?php print($_SERVER['REQUEST_URI']); ?>" />
+    <meta property="og:url" content="<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" />
     

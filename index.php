@@ -2,12 +2,12 @@
 <title>Quiz</title>
 <meta property="og:title" content="Quiz" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="images/background.jpg" />
+<meta property="og:image" content="/images/background.jpg" />
 <meta property="og:description" content="Quiz about IT" />  
 <script>
 var userAnswers = "";
 
-function getNewQuestionFromDatabase(str) {
+function getNewQuestionFromQuestionSet(str) {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -20,12 +20,12 @@ function getNewQuestionFromDatabase(str) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowItWorks.php?idQuestion="+str,true);
+        xmlhttp.open("GET","controlDatabase/showQuestion.php?indexOfQuestion="+str,true);
         xmlhttp.send();
     }
 
 function saveUserAnswers(userAnswer) {
-	var date = new Date();
+    var date = new Date();
     var ms = date.getTime();
     if (userAnswer!=0) {
         userAnswers+=userAnswer+","+ms+",";
@@ -47,10 +47,18 @@ function saveAnswersToDatabase() {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        var date = new Date();
-        var ms = date.getTime();
-        var newMs= ms-1540194340000;
-        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowSaveUser.php?userAnswers="+<?php if (isset($_GET["username"])){echo "\"".$_GET['username']."\"";}else{echo "\"user\"+newMs";}?>+","+userAnswers,true);
+        // var date = new Date();
+        // var ms = date.getTime();
+        //var newMs= ms-1540194340000;
+        xmlhttp.open("GET","controlDatabase/onlyGodKnowHowSaveUser.php?userAnswers=" + 
+            <?php 
+                if (isset($_GET["username"])){
+                    echo "\"".$_GET['username']."\"";
+                }else{
+                    //echo "\"user\"+newMs";
+                    echo "\"User\"";
+                }
+            ?> + "," + userAnswers,true);
         xmlhttp.send();
 }
 var check=true;
@@ -93,7 +101,7 @@ function end(){
                 <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                         <h1>Začít hrát</h1>
                         <h3>Stikni tlačítko a hrej!</h3>
-                        <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value="1" onClick="getNewQuestionFromDatabase(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
+                        <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value='0' onClick="getNewQuestionFromQuestionSet(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
                         </div>
                     </div>
                 </div>

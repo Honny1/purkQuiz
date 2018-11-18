@@ -3,10 +3,10 @@
 <head scrolling="no">
     <?php //include "../header.php" ?>
     <title>Results of Quiz</title>
-    <meta http-equiv="refresh" content="15;url=./marek.php">
+    <meta http-equiv="refresh" content="15;url=./TV.php">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://quiz.buchticka.eu/images/background.jpg" />
+    <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
     <meta property="og:description" content="Results of Quiz about IT" />
     <link rel="stylesheet" type="text/css" href="/styles/style.css">
 
