@@ -1,0 +1,8 @@
+<?php 
+    // Here we must enter variables for connection to database
+    $servername = "localhost";
+    $username = "root";
+    $password= "";
+    $dbname = "quiz";
+
+?>

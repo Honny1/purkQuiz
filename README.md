@@ -2,9 +2,10 @@
 [Buchtička](https://buchticka.eu) Quiz: The Best Kahoot Alternative
 
 ## How to setup
-- Clone this repository
-- edit credentials in file _/controlDatabase/dbconnect.php_
-- edit _/globalVar/variables.php_
+- Install xampp on Windows <3 or Fedora (linux is no long supported!)
+- Clone this repository to htdocs
+    + We recommend make virtualhost quiz._example.com_ in htdocs/quiz._example.com_
+- edit credentials in file _/controlDatabase/dbConnect.php_
 - Go to _/setup_
     + edit database server credentials in file _/setup/dbCredentials.php_
     + open in your browser _yourip:yourport/setup_
