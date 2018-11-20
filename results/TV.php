@@ -136,7 +136,7 @@
         <tr style="width: 100%;">
             <td style="width: 50%;" valign="top">
                 <table class="mui-table mui-table--bordered">
-                    <tfoot><h2>LAST 10</h2></tfoot>
+                    <tfoot><h2>NEWEST 10</h2></tfoot>
                     <thead>
                         <tr>
                             <th style="text-align: center;">Name</th>

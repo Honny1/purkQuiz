@@ -25,7 +25,7 @@
     $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
 
     // This condition says to show question page or save page
-    if ($indexOfNextQuestion != ($settingsRow["countOfActiveQuestions"]-$settingsRow["autoSave"])) {
+    if ($indexOfNextQuestion != ($settingsRow["countOfActiveQuestions"]+1-$settingsRow["autoSave"])) {
         $questionSql = "SELECT * FROM question WHERE `id_question` = '".($questionsArray[$indexOfQuestion])."'";
         
         $questionQuery = mysqli_query($conn, $questionSql);

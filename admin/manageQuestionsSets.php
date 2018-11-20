@@ -54,13 +54,13 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 							<input name='password' value='".$_POST['password']."' style='display: none;'>
 							<input name='id_qs' value='".$_POST['id']."' style='display: none;'>
 							<div class='mui-textfield  mui-textfield--float-label'>
-						    	<input type='text' name='name' id='name' required value='".$_POST["oldName"]."'>
-						    	<label style='text-align: left; '>Name of question set <b style='color: red; '>*</b></label>
-						  	</div>
-						  	<div class='mui-textfield  mui-textfield--float-label'>
-						    	<input type='text' name='questions' id='questions' required value='".$_POST["oldQuestions"]."'>
-						    	<label style='text-align: left; '>Questions <b style='color: red; '>*</b></label>
-						  	</div>
+								<input type='text' name='name' id='name' required value='".$_POST["oldName"]."'>
+								<label style='text-align: left; '>Name of question set <b style='color: red; '>*</b></label>
+							</div>
+							<div class='mui-textfield  mui-textfield--float-label'>
+								<input type='text' name='questions' id='questions' required value='".$_POST["oldQuestions"]."'>
+								<label style='text-align: left; '>Questions <b style='color: red; '>*</b></label>
+								</div>
 							<button  type='submit' class='mui-btn mui-btn--primary mui-btn--raised'>Update</button>
 						</form>";
 				}
@@ -79,7 +79,25 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 			}
 		}
 	}elseif (isset($_POST["name"]) and isset($_POST["questions"]) and isset($_POST["id_qs"])) {
-		$qsQuery = mysqli_query($conn, "UPDATE questionset SET `name` = '".$_POST["name"]."', `questions` = '".$_POST["questions"]."' WHERE id_qs = '".$_POST["id_qs"]."'");
+		try{
+			// Get active question set
+			$settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+			if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+			$settingsRow = mysqli_fetch_array($settingsQuery);
+
+			$questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+			if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+			$questionSetRow = mysqli_fetch_array($questionSetQuery);
+			$questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+			print_r($questionsArray);
+			
+		}catch (Exception $e){
+			die("Problem: ".$e);
+		}
+		$qsSettingsQuery = mysqli_query($conn, "UPDATE settings SET `countOfActiveQuestions` = '".count($questionsArray)."' WHERE id = '1'");
+		if (!$qsSettingsQuery) {
+			die ("\n<br><b>SQL Error: </b>" . mysqli_error($conn));
+		}$qsQuery = mysqli_query($conn, "UPDATE questionset SET `name` = '".$_POST["name"]."', `questions` = '".$_POST["questions"]."' WHERE id_qs = '".$_POST["id_qs"]."'");
 		if (!$qsQuery) {
 			die ("\n<br><b>SQL Error: </b>" . mysqli_error($conn));
 		}else{
