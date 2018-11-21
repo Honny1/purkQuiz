@@ -1,5 +1,5 @@
 <?php
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
 	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
 	
 	echo "
@@ -58,6 +58,6 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 	</div>";
 
 /*S1f0n */
-include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
 include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';
 ?>

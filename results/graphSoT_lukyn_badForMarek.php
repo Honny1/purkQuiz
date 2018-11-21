@@ -28,7 +28,7 @@
   //
   function getDataTime(){
     // this method return data for graph
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     $date0 =round(microtime(true) * 1000)- 3600000;
     $date1 =round(microtime(true) * 1000)- 7200000;
     $date2 =round(microtime(true) * 1000)-10800000;
@@ -105,7 +105,7 @@
 
   function getData(){
     // this method return data for graph
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
 
     $date0 =round(microtime(true) * 1000)- 3600000;
     $date1 =round(microtime(true) * 1000)- 7200000;

@@ -1,7 +1,7 @@
 <?php
 //return questions to web  
     include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     include realpath($_SERVER['DOCUMENT_ROOT']).'/globalVar/variables.php';
     ?>
     <title>Prepare DB for Day D - Quiz</title>

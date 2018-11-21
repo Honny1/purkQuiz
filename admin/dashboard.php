@@ -1,5 +1,5 @@
 <?php
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
 	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
 	//include 'login.php';
 
@@ -171,7 +171,7 @@
 									<tbody>
 										<tr>
 											<td>Count of active questions</td>
-											<td>".$row["countOfActiveQuestions"]." (automatic updating by PHP code or manualy in DB)</td>
+											<td>".$row["countOfActiveQuestions"]." (automatic updating by PHP code or manualy in DBC</td>
 										</tr>
 										<tr>
 											<td>ID of active question set</td>

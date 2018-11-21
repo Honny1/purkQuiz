@@ -1,5 +1,5 @@
 <?php
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
 	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
 ?>
 

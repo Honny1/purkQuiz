@@ -56,7 +56,7 @@
             <tbody>
             <?php 
                 include '../calcResults/getScore.php';
-                include '../controlDatabase/dbconnect.php';
+                include '../controlDatabase/dbConnect.php';
                 $answersSql = "SELECT * FROM answers ORDER BY ID DESC LIMIT 5";
                 $answersQuery = mysqli_query($conn, $answersSql);
 

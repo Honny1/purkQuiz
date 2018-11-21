@@ -9,7 +9,7 @@ function calcScore($startTime,$endTime){
 }
 //return score all questtion
 function getScore($name){
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     $userScore = 0;
    
     $questionSql = "SELECT * FROM question";

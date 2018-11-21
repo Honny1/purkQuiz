@@ -28,7 +28,7 @@
   //include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
   //
   function getData($answer="A"){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     $countToReturn = 0;
 
     for ($i=1; $i < mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]; $i++) { 
@@ -124,16 +124,16 @@
    */
 
   function getColorA($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(255,  80,  80, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);//255,  99, 132
   }function getColorB($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(225, 151,  76, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);// 54, 162, 235
   }function getColorC($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(204, 194,  16, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);//255, 206,  86
   }function getColorD($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(132, 186,  91, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);// 75, 192, 192
   }
 
@@ -146,7 +146,7 @@
       "type":"bar",
       "data":{
         "labels":[<?php 
-          include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+          include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
           for ($i=1; $i < mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]; $i++) { 
             print_r("\"Q".$i."\", ");
           }?>/*"Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8",*/],

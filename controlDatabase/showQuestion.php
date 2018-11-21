@@ -1,6 +1,6 @@
 <?php
 // This file return questions and answers
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbconnect.php';
+    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     include realpath($_SERVER['DOCUMENT_ROOT']).'/globalVar/variables.php';
 ?>
 </head>
