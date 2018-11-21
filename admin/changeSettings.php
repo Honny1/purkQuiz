@@ -11,12 +11,11 @@
   
 </head>
 <body style='background-color: transparent;'>
-	<!--<div class='login' >-->
 	<div class='dashboardContent' >
 		<center>
 			<div style='background-color: rgba(255, 255, 255, 0.75); min-width:400px;' class='mui-panel'>\n";
 if (isset($_POST["username"]) and isset($_POST["password"])) {
-	if (!isset($_POST["countOfActiveQuestions"]) and !isset($_POST["idOfActiveQuestionSet"])) {
+	if (!isset($_POST["idOfActiveQuestionSet"])) {
 		mysqli_query($conn, "SET NAMES 'UTF-8'");
 		$sql = 'SELECT username, password, nick FROM user';
 		$query = mysqli_query($conn, $sql);
@@ -40,24 +39,44 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 					</script>";
 			}
 		}
-	}elseif (isset($_POST["countOfActiveQuestions"]) and isset($_POST["idOfActiveQuestionSet"])) {
-		$qsQuery = mysqli_query($conn, "UPDATE settings SET `countOfActiveQuestions` = '".$_POST["countOfActiveQuestions"]."', `idOfActiveQuestionSet` = '".$_POST["idOfActiveQuestionSet"]."' WHERE id = 1;");
+	}elseif (isset($_POST["idOfActiveQuestionSet"])) {
+		$qsQuery = mysqli_query($conn, "UPDATE settings SET `idOfActiveQuestionSet` = '".$_POST["idOfActiveQuestionSet"]."' WHERE id = 1;");
 		if (!$qsQuery) {
 			die ("\n<br><b>SQL Error: </b>" . mysqli_error($conn));
-		}else{
-			echo " 	<h3>Successfully updated!<h3>
-					<p>Redirecting ...</p>
-					<form action='dashboard.php' method='POST'>
-						<input style='display: none; ' name='username' value='".$_POST["username"]."'>
-						<input style='display: none; ' name='password' value='".$_POST["password"]."'>
-						<input type='submit' value='OK' id='goToDashboard' class='mui-btn'>
-					</form>
-					<script type='text/javascript'>
-						window.setTimeout(function() {
-							document.getElementById('goToDashboard').click();
-						}, 2000);
-					</script>";
 		}
+		try{
+			// Get active question set
+			$settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+			if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+			$settingsRow = mysqli_fetch_array($settingsQuery);
+
+			$questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+			if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+			$questionSetRow = mysqli_fetch_array($questionSetQuery);
+			$questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+			print_r($questionsArray);
+			
+		}catch (Exception $e){
+			die("Problem: ".$e);
+		}
+		$qsSettingsQuery = mysqli_query($conn, "UPDATE settings SET `countOfActiveQuestions` = '".count($questionsArray)."' WHERE id = '1'");
+		if (!$qsSettingsQuery) {
+			die ("\n<br><b>SQL Error: </b>" . mysqli_error($conn));
+		}
+		echo " <h3>Successfully updated!<h3>
+				<p>Redirecting ...</p>
+				<form action='dashboard.php' method='POST'>
+					<input style='display: none; ' name='username' value='".$_POST["username"]."'>
+					<input style='display: none; ' name='password' value='".$_POST["password"]."'>
+					<input style='display: none; ' name='showMe' value='settings'>
+					<input type='submit' value='OK' id='goToDashboard' class='mui-btn'>
+				</form>
+				<script type='text/javascript'>
+					window.setTimeout(function() {
+						document.getElementById('goToDashboard').click();
+					}, 2000);
+				</script>";
+		
 	}	
 }else{
 	echo "<h2>Username and password weren't inserted!</h2>

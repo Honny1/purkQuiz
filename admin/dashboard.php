@@ -171,13 +171,7 @@
 									<tbody>
 										<tr>
 											<td>Count of active questions</td>
-											<td>".$row["countOfActiveQuestions"]." (automatic updating or manualy in DB)</td>
-											<!--<td>
-												<div class='mui-textfield  mui-textfield--float-label'>
-													<input type='text' name='countOfActiveQuestions' required value='".$row["countOfActiveQuestions"]."'>
-													<label style='text-align: left; '>Set new value <b style='color: red; '>*</b></label>
-												</div>
-											</td>-->
+											<td>".$row["countOfActiveQuestions"]." (automatic updating by PHP code or manualy in DB)</td>
 										</tr>
 										<tr>
 											<td>ID of active question set</td>
