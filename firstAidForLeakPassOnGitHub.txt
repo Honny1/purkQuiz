@@ -17,3 +17,5 @@ git filter-branch -f \
     --tag-name-filter cat \
     --tree-filter 'rm -f setup/dbCredentials.php' \
     $(git log --follow --find-renames=40% --diff-filter=A --format=%H -- setup/dbCredentials.php)~..HEAD
+
+#By Hony
