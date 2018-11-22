@@ -15,8 +15,6 @@
   $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
       
   $count = mysqli_num_rows($result1);
-      
-  // If result matched $name, table row count must be bigger then 0 
     
   if($count > 0) {
     $name.=$count;
@@ -24,13 +22,25 @@
   $name = mysqli_real_escape_string($conn, $name);
 
   $sql = "INSERT INTO answers ( name, startTime";
+  $userScore = 0;
 
-  for ($i=1; $i <(sizeof($userAnswersSplit)/2)-1 ; $i++) { 
-    $sql .= ", AQ".$i.", timeAQ".$i;
+  // Get active settings
+  $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+  if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+  $settingsRow = mysqli_fetch_array($settingsQuery);
+
+  // Get active question set
+  $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+  if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+  $questionSetRow = mysqli_fetch_array($questionSetQuery);
+  $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+
+  foreach ($questionsArray as &$indexOfQuestion) {
+    $sql .= ", AQ".$indexOfQuestion.", timeAQ".$indexOfQuestion;
   }
   $sql .= ") VALUES ('$name'";
-  for ($i=1; $i <sizeof($userAnswersSplit)-1 ; $i++){
-    $nasrat=mysqli_real_escape_string($conn, $userAnswersSplit[$i]);
+  for ($i=1; $i < sizeof($userAnswersSplit)-1 ; $i++){
+    $nasrat = mysqli_real_escape_string($conn, $userAnswersSplit[$i]);
     $sql .= ",";
     $sql .= "'$nasrat'";
     
@@ -38,7 +48,7 @@
   $sql .= ")";
 
   if ($conn->query($sql) === TRUE) {
-    $score2 =getScore($name);
+    $score2 = getScore($name);
     saveToRank($name,$score2);
     echo " <div style='width: 280px; left: 28%; right: 28%;' class='gamePin'>
             <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
