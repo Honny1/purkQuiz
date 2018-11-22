@@ -14,11 +14,12 @@
     $indexOfNextQuestion = $indexOfQuestion + 1;
     
 
-    // Get active question set
+    // Get active settings
     $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
     if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
     $settingsRow = mysqli_fetch_array($settingsQuery);
 
+    // Get active question set
     $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
     if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
     $questionSetRow = mysqli_fetch_array($questionSetQuery);

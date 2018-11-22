@@ -6,7 +6,7 @@
 
 		$name = mysqli_real_escape_string($conn,$name);
 		$score = mysqli_real_escape_string($conn,$score);
-		$time= mysqli_real_escape_string($conn,round(microtime(true) * 1000));
+		$time = mysqli_real_escape_string($conn,round(microtime(true) * 1000));
 		$solutionTime = mysqli_real_escape_string($conn,getSolutionTime($name));
 
 		$sql = "INSERT INTO rank (user_name,saveTime,score,solutionTime) VALUES ('$name','$time','$score','$solutionTime')";

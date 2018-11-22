@@ -26,85 +26,28 @@
   <?php 
 
   //include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
-  //
   function getData($answer="A"){
     include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
     $countToReturn = 0;
 
-    for ($i=1; $i < mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]; $i++) { 
-      # code...
-      # print_r("/* i: $i*/");
-      $answersSql = "SELECT COUNT(`AQ$i`) FROM answers WHERE `AQ$i` = '$answer'";
+    // Get active settings
+    $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+    if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+    $settingsRow = mysqli_fetch_array($settingsQuery);
+
+    // Get active question set
+    $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+    if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+    $questionSetRow = mysqli_fetch_array($questionSetQuery);
+    $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+
+    foreach ($questionsArray as &$indexOfQuestion) {
+      $answersSql = "SELECT COUNT(`AQ$indexOfQuestion`) FROM answers WHERE `AQ$indexOfQuestion` = '$answer'";
       $answersQuery = mysqli_query($conn, $answersSql);
       if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
       print_r(mysqli_fetch_array($answersQuery)[0].", ");
-      //$countToReturn += (string)mysqli_fetch_array($answersQuery["COUNT(`AQ".$i."`)"]);
-      //$countToReturn = (int)mysqli_fetch_array($answersQuery[0]);
-      #$countToReturn = (int)mysqli_fetch_row($answersQuery[0]);
-      #
     }return $countToReturn;
-    /*$date0 =round(microtime(true) * 1000)-3600000;
-    $date1 =round(microtime(true) * 1000)-7200000;
-    $date2 =round(microtime(true) * 1000)-10800000;
-    $date3 =round(microtime(true) * 1000)-14400000;
-    $date4 =round(microtime(true) * 1000)-18000000;
-    $date5 =round(microtime(true) * 1000)-21600000;
-    $date6 =round(microtime(true) * 1000)-25200000;
-    $date7 =round(microtime(true) * 1000)-28800000;
-
-    $answersSql = "SELECT * FROM rank";
-    $answersQuery = mysqli_query($conn, $answersSql);
-
-    $maxScore0=0;
-    $count0=0;
-    $maxScore1=0;
-    $count1=0;
-    $maxScore2=0;
-    $count2=0;
-    $maxScore3=0;
-    $count3=0;
-    $maxScore4=0;
-    $count4=0;
-    $maxScore5=0;
-    $count5=0;
-    $maxScore6=0;
-    $count6=0;
-    $maxScore7=0;
-    $count7=0;
-
-    if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-
-    while ($answerRow = mysqli_fetch_array($answersQuery)) {
-        if ($date0<=$answerRow['saveTime']) {
-          $maxScore0+=$answerRow['score'];
-          $count0+=1;
-        }else if ($date1<=$answerRow['saveTime']) {
-          $maxScore1+=$answerRow['score'];
-          $count1+=1;
-        }else if ($date2<=$answerRow['saveTime']) {
-          $maxScore2+=$answerRow['score'];
-          $count2+=1;
-        }else if ($date3<=$answerRow['saveTime']) {
-          $maxScore3+=$answerRow['score'];
-          $count3+=1;
-        }else if ($date4<=$answerRow['saveTime']) {
-          $maxScore4+=$answerRow['score'];
-          $count4+=1;
-        } else if ($date5<=$answerRow['saveTime']) {
-          $maxScore5+=$answerRow['score'];
-          $count5+=1;
-        } else if ($date6<=$answerRow['saveTime']) {
-          $maxScore6+=$answerRow['score'];
-          $count6+=1;
-        } else if ($date7<=$answerRow['saveTime']) {
-          $maxScore7+=$answerRow['score'];
-          $count7+=1;
-        }  
-      }
-    mysqli_close($conn);
-
-    return getAvg($maxScore7,$count7).",".getAvg($maxScore6,$count6).",".getAvg($maxScore5,$count5).",".getAvg($maxScore4,$count4).",".getAvg($maxScore3,$count3).",".getAvg($maxScore2,$count2).",".getAvg($maxScore1,$count1).",".getAvg($maxScore0,$count0);
-    //return getAvg($maxScore0,$count0).",".getAvg($maxScore1,$count1).",".getAvg($maxScore2,$count2).",".getAvg($maxScore3,$count3).",".getAvg($maxScore4,$count4).",".getAvg($maxScore5,$count5).",".getAvg($maxScore6,$count6).",".getAvg($maxScore7,$count7);*/
+    
   }
 
   function getAvg($maxScore,$count){
@@ -147,8 +90,19 @@
       "data":{
         "labels":[<?php 
           include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
-          for ($i=1; $i < mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]; $i++) { 
-            print_r("\"Q".$i."\", ");
+          // Get active settings
+          $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+          if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+          $settingsRow = mysqli_fetch_array($settingsQuery);
+
+          // Get active question set
+          $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+          if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+          $questionSetRow = mysqli_fetch_array($questionSetQuery);
+          $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+
+          foreach ($questionsArray as &$indexOfQuestion) {
+            print_r("\"Q".$indexOfQuestion."\", ");
           }?>/*"Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8",*/],
         "datasets":[
           {

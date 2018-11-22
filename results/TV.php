@@ -192,19 +192,28 @@
                         $answersQuery = mysqli_query($conn, $answersSql);
                         if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
+                        function getIdOfLastQuestion(){
+                            // THIS FUNCTION RETURN ID OF LAST QUESTION IN ACTUAL QUESTIONSET
+                            include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+                            // Get active settings
+                            $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+                            if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                            $settingsRow = mysqli_fetch_array($settingsQuery);
+
+                            // Get active question set
+                            $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+                            if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                            $questionSetRow = mysqli_fetch_array($questionSetQuery);
+                            $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+                            return (int)end($questionsArray);
+                        }
+
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
                                     <td>".$answerRow['name']."</td>
                                     <td>". round(getScore($answerRow['name']))."</td>
-                                    <!--<td>".$answerRow['AQ1']."</td>
-                                    <td>".$answerRow['AQ2']."</td>
-                                    <td>".$answerRow['AQ3']."</td>
-                                    <td>".$answerRow['AQ4']."</td>
-                                    <td>".$answerRow['AQ5']."</td>
-                                    <td>".$answerRow['AQ6']."</td>
-                                    <td>".$answerRow['AQ7']."</td>
-                                    <td>".$answerRow['AQ8']."</td>-->
-                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)." s</td>
+                                    <!--<td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)." s</td>-->
+                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.((string)getIdOfLastQuestion())],$answerRow['startTime']),'1000',2)." s</td>
                                  </tr>";
                             }
                         mysqli_close($conn);
@@ -366,7 +375,7 @@
                 $startTimeScoreQuery = mysqli_query($conn, "SELECT SUM(`startTime`) FROM answers");
                 if (!$startTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
                 //echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);
-                echo date("h:m:s", bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2))." s";
+                echo date("h:m:s", (int)bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2))." s";
                 mysqli_close($conn);
             ?>";
 
