@@ -1,0 +1,21 @@
+#EXAMPLE
+git filter-branch -f \
+    --prune-empty \
+    --tag-name-filter cat \
+    --tree-filter 'rm -f $FILE' \
+    $(git log --follow --find-renames=40% --diff-filter=A --format=%H -- $FILE)~..HEAD
+
+#COPYPASTA
+git filter-branch -f \
+    --prune-empty \
+    --tag-name-filter cat \
+    --tree-filter 'rm -f controlDatabase/dbConnect.php' \
+    $(git log --follow --find-renames=40% --diff-filter=A --format=%H -- controlDatabase/dbConnect.php)~..HEAD
+
+git filter-branch -f \
+    --prune-empty \
+    --tag-name-filter cat \
+    --tree-filter 'rm -f setup/dbCredentials.php' \
+    $(git log --follow --find-renames=40% --diff-filter=A --format=%H -- setup/dbCredentials.php)~..HEAD
+
+#By Hony
