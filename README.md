@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Quiz
 [Buchtička](https://buchticka.eu) Quiz: The Best Kahoot Alternative
 
@@ -32,3 +33,6 @@ sudo pip install -r requirements.txt
 ```
 python run.py
 ```
+=======
+Hello world!
+>>>>>>> 8ff34e1... Add README.md
