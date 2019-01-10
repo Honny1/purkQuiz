@@ -21,6 +21,7 @@
   }else{
     $name.="_pokus0";
   }
+
   $name = mysqli_real_escape_string($conn, $name);
 
   $sql = "INSERT INTO answers ( name, startTime";
