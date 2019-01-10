@@ -101,7 +101,8 @@ function end(){
                 <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
                         <h1>Začít hrát</h1>
                         <h3>Stikni tlačítko a hrej!</h3>
-                        <p style="color: red;"><strong>Pozor! na každnou otázku máš PŘIBLIŽNĚ 10s.</strong></p>
+                        <h2 style="color: red;">Pozor!</h2> 
+                        <p style="font-size: 130%;" >Na každnou otázku máš PŘIBLIŽNĚ 10s.</p>
                         <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value='0' onClick="getNewQuestionFromQuestionSet(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
                         </div>
                     </div>
