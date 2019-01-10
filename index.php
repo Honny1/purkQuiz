@@ -22,34 +22,52 @@
      mysqli_close($conn);
    }
 ?>
-<html>
-   
-   <head>
-      <title>QUIZ</title>
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="//cdn.muicss.com/mui-0.9.41/css/mui.min.css" rel="stylesheet" type="text/css" />
-      <script src="//cdn.muicss.com/mui-0.9.41/js/mui.min.js"></script> 
-      <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
-      <link rel="stylesheet" type="text/css" href="css/style.css">  
+<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php' ?>
    </head>
    
-   <body>
-      <h1>WELCOME IN QUIZ</h1>
-      <div align = "center" style = "background-color:">
-         <div style = "width:300px; border: solid 1px #000000; " align = "left">
-            <div style = "background-color:#000000; color:#FFFFFF; padding:3px;"><b>Login</b></div>
-            <div style = "margin:30px">
-               <form class="mui-form--inline" action = "" method = "post">
-                  <label>UserName:</label><div class="mui-textfield"><input type = "text" name = "username" class = "box" required/></div><br /><br />
-                  <label>Password:</label><div class="mui-textfield"><input type = "password" name = "password" class = "box" required/></div><br/><br />
-                  <input class="mui-btn mui-btn--flat" type = "submit" value = "Confirm"/><br />
-               </form>
-               <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
-            </div>				
+   <body style="background-color: transparent; ">
+      <h1 style="text-align: center; ">WELCOME TO QUIZ</h1>
+      <div align="center" style="background-color: transparent; ">
+	 <div style="width: 500px; " align="left">
+	    <div style="background-color: #000000; color:#FFFFFF; padding:3px; text-align: center; font-size: 111%; ">
+		<b>Login</b>
+	    </div>
+            <div class="mui-panel" style="background-color: rgba(255, 255, 255, 0.7); padding-left:30px; padding-right:30px; ">
+	       <form class="mui-form--inline" action = "" method = "post">
+		<table style="width: 100%; " >
+			<tr>
+				<td>
+		  <div class="mui-textfield  mui-textfield--float-label" style="width: 100%; ">
+                      <input class="box" type="text" name="username" required>
+                      <label style="text-align: center; ">Nick</label>
+		  </div>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+                  <div class="mui-textfield  mui-textfield--float-label" style="width: 100%; ">
+                      <input class="box" type="password" name="password" required>
+                      <label style="text-align: center; ">Password</label>
+		  </div>
+				</td>
+			</tr>
+		</table>
+		  <br/>
+		  <br/>
+		 <center><input style-"color: red;" class="mui-btn mui-btn--flat" type="submit" value="OK"/></center>
+	       </form>
+		<?php
+			if($error != ""){
+				echo "
+				<div style = \"font-size:11px; color:#cc0000; margin-top:10px\">
+					$error
+				</div>";
+			}
+		?>
          </div>
       </div>
-      <br/>
-      <p>By: Hony</p>
+      <?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php' ?>
    </body>
+
 </html>
