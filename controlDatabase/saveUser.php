@@ -17,7 +17,9 @@
   $count = mysqli_num_rows($result1);
     
   if($count > 0) {
-    $name.=$count;
+    $name.="_pokus". $count;
+  }else{
+    $name.="_pokus0";
   }
   $name = mysqli_real_escape_string($conn, $name);
 
