@@ -2,7 +2,7 @@
 <html>
 <head scrolling="no">
     <title>Results of Quiz</title>
-    <meta http-equiv="refresh" content="15;url=">
+    <meta http-equiv="refresh" content="15;url=./tv.php">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
@@ -146,6 +146,7 @@
                     <tbody>
                     <?php 
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
+                                                            
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
                         
                         $questionsSql = "SELECT * FROM question";
