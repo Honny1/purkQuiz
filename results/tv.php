@@ -3,15 +3,16 @@
 <head scrolling="no">
     <?php //include "../header.php" ?>
     <title>Results of Quiz</title>
-    <meta http-equiv="refresh" content="20;url=./marek.php">
+    <meta http-equiv="refresh" content="15;url=./tv.php">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://quiz.buchticka.eu/images/background.jpg" />
+    <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
     <meta property="og:description" content="Results of Quiz about IT" />
     <link rel="stylesheet" type="text/css" href="/styles/style.css">
 
     <style type="text/css">
         html{
+            overflow:hidden;
             background-color: #2e3136; /*#161719;/*black*/
             background-image: none;
             color: rgba(173,255,47, 0.8); /*greenyellow;*/
@@ -103,36 +104,39 @@
     <table style="width: 100%; ">
         <tr style="width: 100%;  ">
             <td style="width: 50%; height: 100%; " class="graph" valign="top">
-                <a href="graphFoR_lukyn.php">
-                    <iframe src="graphFoR_lukyn.php" href="graphFoR_lukyn.php" style="width: 100%; height: 105%; min-height: 400px; " frameborder="0" valign="top" align="left" scrolling="no"></iframe>
+                <a href="graphFoR.php">
+                    <iframe src="graphFoR.php" href="graphFoR.php" style="width: 100%; height: 105%; min-height: 400px; " frameborder="0" valign="top" align="left" scrolling="no"></iframe>
                 </a>
             </td>
             <td style="width: 50%; height: 100%; " class="graph" valign="top">
-                <a href="graphSoT_lukyn.php">
-                    <iframe src="graphSoT_lukyn.php" style="width: 100%; height: 105%; min-height: 400px; " frameborder="0" valign="top" align="left" scrolling="no"></iframe>
+                <a href="graphSoT.php">
+                    <iframe src="graphSoT.php" style="width: 100%; height: 105%; min-height: 400px; " frameborder="0" valign="top" align="left" scrolling="no"></iframe>
                 </a>
             </td>
         </tr>
     </table>
+    <!--<h2>Score statistics</h2>-->
     <table class="mui-table mui-table--bordered">
         <thead>
-            <th style="text-align: center; width: 25%;">Max</th>
-            <th style="text-align: center; width: 25%;">Min</th>
-            <th style="text-align: center; width: 25%;">Avg</th>
-            <th style="text-align: center; width: 25%;">Total time</th>
+            <th style="text-align: center; width: 25%;">Maximal score</th>
+            <th style="text-align: center; width: 25%;">Minimal score</th>
+            <th style="text-align: center; width: 25%;">Average score</th>
+            <th style="text-align: center; width: 25%;">Average time</th>
+            <!--<th style="text-align: center; width: 25%;">Total time</th>-->
         </thead>
         <tbody>
             <td id="max"></td>
             <td id="min"></td>
             <td id="avg"></td>
-            <td id="totalTime"></td>
+            <td id="avgTime"></td>
+            <!--<td id="totalTime"></td>-->
         </tbody>
     </table>
     <table style="width: 100%;">
         <tr style="width: 100%;">
             <td style="width: 50%;" valign="top">
                 <table class="mui-table mui-table--bordered">
-                    <tfoot><h2>LAST 10</h2></tfoot>
+                    <tfoot><h2>NEWEST 10</h2></tfoot>
                     <thead>
                         <tr>
                             <th style="text-align: center;">Name</th>
@@ -188,19 +192,28 @@
                         $answersQuery = mysqli_query($conn, $answersSql);
                         if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
+                        function getIdOfLastQuestion(){
+                            // THIS FUNCTION RETURN ID OF LAST QUESTION IN ACTUAL QUESTIONSET
+                            include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+                            // Get active settings
+                            $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+                            if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                            $settingsRow = mysqli_fetch_array($settingsQuery);
+
+                            // Get active question set
+                            $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+                            if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                            $questionSetRow = mysqli_fetch_array($questionSetQuery);
+                            $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+                            return (int)end($questionsArray);
+                        }
+
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
                                     <td>".$answerRow['name']."</td>
                                     <td>". round(getScore($answerRow['name']))."</td>
-                                    <!--<td>".$answerRow['AQ1']."</td>
-                                    <td>".$answerRow['AQ2']."</td>
-                                    <td>".$answerRow['AQ3']."</td>
-                                    <td>".$answerRow['AQ4']."</td>
-                                    <td>".$answerRow['AQ5']."</td>
-                                    <td>".$answerRow['AQ6']."</td>
-                                    <td>".$answerRow['AQ7']."</td>
-                                    <td>".$answerRow['AQ8']."</td>-->
-                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)."s</td>
+                                    <!--<td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)." s</td>-->
+                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.((string)getIdOfLastQuestion())],$answerRow['startTime']),'1000',2)." s</td>
                                  </tr>";
                             }
                         mysqli_close($conn);
@@ -223,12 +236,36 @@
                             <th style="text-align: center; width: 60px;">AQ6</th> 
                             <th style="text-align: center; width: 60px;">AQ7</th> 
                             <th style="text-align: center; width: 60px;">AQ8</th>-->
-                            <th style="text-align: center;">Time</th> 
+                           <th style="text-align: center;">Time</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+                        /*$questionsSql = "SELECT * FROM question ORDER BY score DESC LIMIT 10";
+                        $questionsQuery = mysqli_query($conn, $questionsSql);
+                        if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                        $correctAnswers = array();
+                        while ($questionRow = mysqli_fetch_array($questionsQuery)) {
+                             array_push($correctAnswers, $questionRow["correct"]);
+                        }*/
+                        
+                        $answersSql = "SELECT * FROM rank ORDER BY score DESC LIMIT 10";
+                        $answersQuery = mysqli_query($conn, $answersSql);
+                        if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+
+                        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+                        while ($answerRow = mysqli_fetch_array($answersQuery)) {
+                            echo "<tr>
+                                    <td>".$answerRow['user_name']."</td>
+                                    <td>".$answerRow['score']."</td>
+                                    <!--<td>".floor(((float)$answerRow['solutionTime'] /1000)/60)." s</td>-->
+                                    <td>".bcdiv($answerRow['solutionTime'],'1000',2)." s</td>
+                                 </tr>";
+                            }
+                        mysqli_close($conn);
+                    /*
+                        include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbConnect.php';
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
@@ -256,7 +293,7 @@
                                         )."s</td>
                                  </tr>";
                             }
-                        mysqli_close($conn);
+                        mysqli_close($conn);*/
                     ?>
                     </tbody>
                 </table>
@@ -326,14 +363,21 @@
                 if (!$avgScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
                 print_r(mysqli_fetch_array($avgScoreQuery)[0]);
             ?>";
+            document.getElementById("avgTime").innerHTML = "<?php
+                $avgScoreQuery = mysqli_query($conn, "SELECT AVG(`solutionTime`) FROM rank");
+                if (!$avgScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                //print_r(date("h:m:s", bcdiv(mysqli_fetch_array($avgScoreQuery)[0]),'1000',2));
+                echo bcdiv(mysqli_fetch_array($avgScoreQuery)[0],'1000',2).' s';
+            ?>";
             document.getElementById("totalTime").innerHTML  = "<?php
                 $totalTimeScoreQuery = mysqli_query($conn, "SELECT SUM(`timeAQ".(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)."`) FROM answers");
                 if (!$totalTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
                 $startTimeScoreQuery = mysqli_query($conn, "SELECT SUM(`startTime`) FROM answers");
                 if (!$startTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-                echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);
+                //echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);
+                echo date("h:m:s", (int)bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2))." s";
                 mysqli_close($conn);
-            ?>s";
+            ?>";
 
         }
         window.onload = function () {

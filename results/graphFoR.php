@@ -81,7 +81,7 @@
   }
 
   ?>
-  <script src="/results/Chart.js"></script>
+  <script src="/js/chart.js"></script>
   <!--<canvas id="graph"></canvas>-->
   <canvas id="graph" style="height: 100%; min-height: 390px; width: 100%; min-width: 100%%; "></canvas>
   <script>
