@@ -2,7 +2,7 @@
 <html>
 <head scrolling="no">
     <title>Results of Quiz</title>
-    <meta http-equiv="refresh" content="15;url=./tv.php">
+    <meta http-equiv="refresh" content="15;url=">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
