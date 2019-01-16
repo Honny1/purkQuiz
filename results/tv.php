@@ -146,7 +146,6 @@
                     <tbody>
                     <?php 
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
-                                                            
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
                         
                         $questionsSql = "SELECT * FROM question";
