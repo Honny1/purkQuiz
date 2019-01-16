@@ -27,10 +27,10 @@ function getNewQuestionFromQuestionSet(str) {
 function saveUserAnswers(userAnswer) {
     var date = new Date();
     var ms = date.getTime();
-    if (userAnswer!=0) {
-        userAnswers+=userAnswer+","+ms+",";
+    if (userAnswer != 0) {
+        userAnswers += userAnswer + "," + ms + ",";
     }else{
-  	     userAnswers+=ms+",";
+  	     userAnswers += ms + ",";
   }
 }  
 
@@ -49,7 +49,7 @@ function saveAnswersToDatabase() {
         };
         // var date = new Date();
         // var ms = date.getTime();
-        //var newMs= ms-1540194340000;
+        //var newMs = ms - 1540194340000;
         xmlhttp.open("GET","controlDatabase/saveUser.php?userAnswers=" + 
             <?php 
                 if (isset($_GET["username"])){
@@ -58,36 +58,40 @@ function saveAnswersToDatabase() {
                     //echo "\"user\"+newMs";
                     echo "\"Player\"";
                 }
-            ?> + "," + userAnswers,true);
+            ?> + "," + userAnswers, true);
         xmlhttp.send();
 }
-var check=true;
+var check = true;
 var timerId;
 function progressCountdown(timeleft) {
     var elem = document.getElementById('countdown');
     var timerId = setInterval(countdown, 1000);
 
     function countdown() {
-    if(navigator.onLine){
-        if (check) {
-        if (timeleft == -1) {
-            clearTimeout(timerId);    
-                end();
-                check=true;
+        if(navigator.onLine){
+            if (check) {
+                if (timeleft == -1) {
+                    clearTimeout(timerId);    
+                    end();
+                    check = true;
+                } else {
+                    if (timeleft!=10) {
+                        document.getElementById("countdown").innerHTML = timeleft;
+                    }
+                    timeleft--;
+                }
+            } else{
+                clearTimeout(timerId);
+                check = true;
+            }
         } else {
-            if (timeleft!=10) { document.getElementById("countdown").innerHTML = timeleft;}
-            timeleft--;
-    }}else{
-        clearTimeout(timerId);
-        check=true;
-    }} else {
                 alert('offline');
-            }       
-}
+        }
+    }
 
 }
 function stopCountdown() {
-    check=false;
+    check = false;
 }   
 function end(){
     document.getElementById('NaN').click();

@@ -5,7 +5,7 @@
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       
      $query = "SELECT * FROM user";
-     $result = $conn ->query($query);
+     $result = $conn -> query($query);
      $hodnota=False;
      if (mysqli_num_rows($result)>0){
 	        while($row = mysqli_fetch_assoc($result)){
