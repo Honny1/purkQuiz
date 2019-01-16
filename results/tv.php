@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head scrolling="no">
-    <?php //include "../header.php" ?>
     <title>Results of Quiz</title>
     <meta http-equiv="refresh" content="15;url=./tv.php">
     <meta property="og:title" content="Results of Quiz" />
@@ -115,6 +114,7 @@
             </td>
         </tr>
     </table>
+
     <!--<h2>Score statistics</h2>-->
     <table class="mui-table mui-table--bordered">
         <thead>
@@ -122,7 +122,6 @@
             <th style="text-align: center; width: 25%;">Minimal score</th>
             <th style="text-align: center; width: 25%;">Average score</th>
             <th style="text-align: center; width: 25%;">Average time</th>
-            <!--<th style="text-align: center; width: 25%;">Total time</th>-->
         </thead>
         <tbody>
             <td id="max"></td>
@@ -141,35 +140,32 @@
                         <tr>
                             <th style="text-align: center;">Name</th>
                             <th style="text-align: center; min-width: 110px;">Score</th>
-                            <!--<th style="text-align: center; width: 60px;">AQ1</th> 
-                            <th style="text-align: center; width: 60px;">AQ2</th>
-                            <th style="text-align: center; width: 60px;">AQ3</th> 
-                            <th style="text-align: center; width: 60px;">AQ4</th> 
-                            <th style="text-align: center; width: 60px;">AQ5</th> 
-                            <th style="text-align: center; width: 60px;">AQ6</th> 
-                            <th style="text-align: center; width: 60px;">AQ7</th> 
-                            <th style="text-align: center; width: 60px;">AQ8</th>-->
                             <th style="text-align: center;">Time</th> 
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
-                                                            
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+                        
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
-                        if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                        if (!$questionsQuery) {
+                            die ('SQL Error: ' . mysqli_error($conn));
+                        }
+                        
                         $correctAnswers = array();
                         while ($questionRow = mysqli_fetch_array($questionsQuery)) {
                              array_push($correctAnswers, $questionRow["correct"]);
                         }
+                        
                         //print_r($correctAnswers);
 
                         function isCorrectAnswer($userAnswer='A', $numberOfQuestion=1){
                             global $correctAnswers;
                             return (boolean)((string)$correctAnswers[(string)($numberOfQuestion-1)] == (string)$userAnswer);
                         }
+                        
                         function styleTd($userAnswer='A', $numberOfQuestion=1){
                             if (isCorrectAnswer($userAnswer, $numberOfQuestion)) {
                                 return "background-color: rgba(132, 186,  91, 0.6); ";
@@ -177,45 +173,61 @@
                                 return "background-color: rgba(255,  80,  80, 0.6); ";
                             }
                         }
-                        /*
-                        
-                                    <td style='".styleTd($answerRow['AQ1'], 1)."'>".$answerRow['AQ1']."</td>
-                                    <td style='".styleTd($answerRow['AQ2'], 2)."'>".$answerRow['AQ2']."</td>
-                                    <td style='".styleTd($answerRow['AQ3'], 3)."'>".$answerRow['AQ3']."</td>
-                                    <td style='".styleTd($answerRow['AQ4'], 4)."'>".$answerRow['AQ4']."</td>
-                                    <td style='".styleTd($answerRow['AQ5'], 5)."'>".$answerRow['AQ5']."</td>
-                                    <td style='".styleTd($answerRow['AQ6'], 6)."'>".$answerRow['AQ6']."</td>
-                                    <td style='".styleTd($answerRow['AQ7'], 7)."'>".$answerRow['AQ7']."</td>
-                                    <td style='".styleTd($answerRow['AQ8'], 8)."'>".$answerRow['AQ8']."</td>
-                         */
+
                         $answersSql = "SELECT * FROM answers ORDER BY ID DESC LIMIT 10";
                         $answersQuery = mysqli_query($conn, $answersSql);
                         if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
                         function getIdOfLastQuestion(){
-                            // THIS FUNCTION RETURN ID OF LAST QUESTION IN ACTUAL QUESTIONSET
-                            include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+                            // This function return ID of last question in active questionSet
                             // Get active settings
+                            global $conn;
                             $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
-                            if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                            if (!$settingsQuery) {
+                                die ('SQL Error: ' . mysqli_error($conn));
+                            }
                             $settingsRow = mysqli_fetch_array($settingsQuery);
 
                             // Get active question set
                             $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
-                            if (!$questionSetQuery) {die ('SQL Error: ' . mysqli_error($conn));}
+                            if (!$questionSetQuery) {
+                                die ('SQL Error: ' . mysqli_error($conn));
+                            }
                             $questionSetRow = mysqli_fetch_array($questionSetQuery);
                             $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
                             return (int)end($questionsArray);
+                        }
+
+                        function getIdOfActiveQuestions(){
+                            // This function return array of IDs question in active questionSet
+                            // Get active settings
+                            global $conn;
+                            $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+                            if (!$settingsQuery) {
+                                die ('SQL Error: ' . mysqli_error($conn));
+                            }
+                            $settingsRow = mysqli_fetch_array($settingsQuery);
+
+                            // Get active question set
+                            $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+                            if (!$questionSetQuery) {
+                                die ('SQL Error: ' . mysqli_error($conn));
+                            }
+                            $questionSetRow = mysqli_fetch_array($questionSetQuery);
+                            $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+                            return (array)($questionsArray);
                         }
 
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
                                     <td>".$answerRow['name']."</td>
                                     <td>". round(getScore($answerRow['name']))."</td>
-                                    <!--<td>".bcdiv(bcsub($answerRow['timeAQ'.(mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],$answerRow['startTime']),'1000',2)." s</td>-->
-                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.((string)getIdOfLastQuestion())],$answerRow['startTime']),'1000',2)." s</td>
-                                 </tr>";
-                            }
+                                    <td>".bcdiv(bcsub($answerRow['timeAQ'.((string)getIdOfLastQuestion())],$answerRow['startTime']),'1000',2)." s</td>";
+                            /*foreach(getIdOfActiveQuestions() as $i){
+                                print_r("<td style='".styleTd($answerRow["AQ$i"], $i)."'>".$answerRow["AQ$i"]."</td>");
+                            }*/
+                            echo "</tr>";
+                          }
                         mysqli_close($conn);
                     ?>
                     </tbody>
@@ -228,15 +240,7 @@
                         <tr>
                             <th style="text-align: center;">Name</th>
                             <th style="text-align: center; min-width: 110px;">Score</th>
-                            <!--<th style="text-align: center; width: 60px;">AQ1</th> 
-                            <th style="text-align: center; width: 60px;">AQ2</th>
-                            <th style="text-align: center; width: 60px;">AQ3</th> 
-                            <th style="text-align: center; width: 60px;">AQ4</th> 
-                            <th style="text-align: center; width: 60px;">AQ5</th> 
-                            <th style="text-align: center; width: 60px;">AQ6</th> 
-                            <th style="text-align: center; width: 60px;">AQ7</th> 
-                            <th style="text-align: center; width: 60px;">AQ8</th>-->
-                           <th style="text-align: center;">Time</th>
+                            <th style="text-align: center;">Time</th>
                         </tr>
                     </thead>
                     <tbody>
