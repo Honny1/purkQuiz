@@ -1,8 +1,74 @@
+<?php
+include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
+include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+
+function getIdOfActiveQuestions(){
+    // This function return array of IDs question in active questionSet
+    // Get active settings
+    global $conn;
+    $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+    if (!$settingsQuery) {
+       die ('SQL Error: ' . mysqli_error($conn));
+    }
+    $settingsRow = mysqli_fetch_array($settingsQuery);
+    
+    // Get active question set
+    $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+    if (!$questionSetQuery) {
+        die ('SQL Error: ' . mysqli_error($conn));
+    }
+    $questionSetRow = mysqli_fetch_array($questionSetQuery);
+    $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+    return (array)($questionsArray);
+}
+$activeQuestionsArray = getIdOfActiveQuestions();
+
+function getIdOfLastQuestion(){
+    // This function return ID of last question in active questionSet
+    // Get active settings
+    global $conn;
+    $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
+    if (!$settingsQuery) {
+        die ('SQL Error: ' . mysqli_error($conn));
+    }
+    $settingsRow = mysqli_fetch_array($settingsQuery);
+
+    // Get active question set
+    $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
+    if (!$questionSetQuery) {
+        die ('SQL Error: ' . mysqli_error($conn));
+    }
+    $questionSetRow = mysqli_fetch_array($questionSetQuery);
+    $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
+    return (int)end($questionsArray);
+}
+
+function isCorrectAnswer($userAnswer='A', $numberOfQuestion=1){
+    global $correctAnswers;
+    return (boolean)((string)$correctAnswers[(string)($numberOfQuestion-1)] == (string)$userAnswer);
+}
+                        
+function styleTd($userAnswer='A', $numberOfQuestion=1){
+    if (isCorrectAnswer($userAnswer, $numberOfQuestion)) {
+        return "background-color: rgba(132, 186,  91, 0.6); ";
+    }else{
+        return "background-color: rgba(255,  80,  80, 0.6); ";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head scrolling="no">
     <title>Results of Quiz</title>
     <meta http-equiv="refresh" content="15;url=">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#2e3136">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#2e3136">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2e3136">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
@@ -128,7 +194,6 @@
             <td id="min"></td>
             <td id="avg"></td>
             <td id="avgTime"></td>
-            <!--<td id="totalTime"></td>-->
         </tbody>
     </table>
     <table style="width: 100%;">
@@ -139,15 +204,18 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center; width: 30px;">Try</th>
                             <th style="text-align: center; min-width: 110px;">Score</th>
-                            <th style="text-align: center;">Time</th> 
+                            <th style="text-align: center; min-width: 60px;">Time</th>
+                            <?php
+                                /*foreach(getIdOfActiveQuestions() as $i){
+                                        echo ("<th style='text-align: center; '>Q$i</th>");
+                                }*/
+                            ?> 
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
-                        include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
-                        include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
-                        
                         $questionsSql = "SELECT * FROM question";
                         $questionsQuery = mysqli_query($conn, $questionsSql);
                         if (!$questionsQuery) {
@@ -158,72 +226,21 @@
                         while ($questionRow = mysqli_fetch_array($questionsQuery)) {
                              array_push($correctAnswers, $questionRow["correct"]);
                         }
-                        
                         //print_r($correctAnswers);
-
-                        function isCorrectAnswer($userAnswer='A', $numberOfQuestion=1){
-                            global $correctAnswers;
-                            return (boolean)((string)$correctAnswers[(string)($numberOfQuestion-1)] == (string)$userAnswer);
-                        }
-                        
-                        function styleTd($userAnswer='A', $numberOfQuestion=1){
-                            if (isCorrectAnswer($userAnswer, $numberOfQuestion)) {
-                                return "background-color: rgba(132, 186,  91, 0.6); ";
-                            }else{
-                                return "background-color: rgba(255,  80,  80, 0.6); ";
-                            }
-                        }
 
                         $answersSql = "SELECT * FROM answers ORDER BY ID DESC LIMIT 10";
                         $answersQuery = mysqli_query($conn, $answersSql);
-                        if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-
-                        function getIdOfLastQuestion(){
-                            // This function return ID of last question in active questionSet
-                            // Get active settings
-                            global $conn;
-                            $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
-                            if (!$settingsQuery) {
-                                die ('SQL Error: ' . mysqli_error($conn));
-                            }
-                            $settingsRow = mysqli_fetch_array($settingsQuery);
-
-                            // Get active question set
-                            $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
-                            if (!$questionSetQuery) {
-                                die ('SQL Error: ' . mysqli_error($conn));
-                            }
-                            $questionSetRow = mysqli_fetch_array($questionSetQuery);
-                            $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
-                            return (int)end($questionsArray);
-                        }
-
-                        function getIdOfActiveQuestions(){
-                            // This function return array of IDs question in active questionSet
-                            // Get active settings
-                            global $conn;
-                            $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
-                            if (!$settingsQuery) {
-                                die ('SQL Error: ' . mysqli_error($conn));
-                            }
-                            $settingsRow = mysqli_fetch_array($settingsQuery);
-
-                            // Get active question set
-                            $questionSetQuery = mysqli_query($conn, "SELECT * FROM questionset WHERE `id_qs` = ".$settingsRow["idOfActiveQuestionSet"]."; ");
-                            if (!$questionSetQuery) {
-                                die ('SQL Error: ' . mysqli_error($conn));
-                            }
-                            $questionSetRow = mysqli_fetch_array($questionSetQuery);
-                            $questionsArray = explode(", ", implode((array)$questionSetRow["questions"]));
-                            return (array)($questionsArray);
+                        if (!$answersQuery) {
+                            die ('SQL Error: ' . mysqli_error($conn));
                         }
 
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
-                                    <td>".$answerRow['name']."</td>
-                                    <td>". round(getScore($answerRow['name']))."</td>
+                                    <td>".$answerRow['name'],"</td>
+                                    <td>".$answerRow['try']."</td>
+                                    <td>". round(getScore($answerRow['name'], $answerRow['try']))."</td>
                                     <td>".bcdiv(bcsub($answerRow['timeAQ'.((string)getIdOfLastQuestion())],$answerRow['startTime']),'1000',2)." s</td>";
-                            /*foreach(getIdOfActiveQuestions() as $i){
+                            /*foreach($activeQuestionsArray as $i){
                                 print_r("<td style='".styleTd($answerRow["AQ$i"], $i)."'>".$answerRow["AQ$i"]."</td>");
                             }*/
                             echo "</tr>";
@@ -239,6 +256,7 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center; width: 30px;">Try</th>
                             <th style="text-align: center; min-width: 110px;">Score</th>
                             <th style="text-align: center;">Time</th>
                         </tr>
@@ -246,58 +264,21 @@
                     <tbody>
                     <?php 
                         include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
-                        /*$questionsSql = "SELECT * FROM question ORDER BY score DESC LIMIT 10";
-                        $questionsQuery = mysqli_query($conn, $questionsSql);
-                        if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-                        $correctAnswers = array();
-                        while ($questionRow = mysqli_fetch_array($questionsQuery)) {
-                             array_push($correctAnswers, $questionRow["correct"]);
-                        }*/
                         
                         $answersSql = "SELECT * FROM rank ORDER BY score DESC LIMIT 10";
                         $answersQuery = mysqli_query($conn, $answersSql);
                         if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
 
-                        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+                        //ini_set('max_execution_time', 300); //300 seconds = 5 minutes
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
                                     <td>".$answerRow['user_name']."</td>
+                                    <td>".$answerRow['try']."</td>
                                     <td>".$answerRow['score']."</td>
-                                    <!--<td>".floor(((float)$answerRow['solutionTime'] /1000)/60)." s</td>-->
                                     <td>".bcdiv($answerRow['solutionTime'],'1000',2)." s</td>
                                  </tr>";
                             }
                         mysqli_close($conn);
-                    /*
-                        include realpath($_SERVER['DOCUMENT_ROOT']).'//controlDatabase/dbConnect.php';
-                        $questionsSql = "SELECT * FROM question";
-                        $questionsQuery = mysqli_query($conn, $questionsSql);
-                        if (!$questionsQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-                        $correctAnswers = array();
-                        while ($questionRow = mysqli_fetch_array($questionsQuery)) {
-                             array_push($correctAnswers, $questionRow["correct"]);
-                        }
-                        
-                        $answersSql = "SELECT * FROM rank ORDER BY score DESC LIMIT 10";
-                        $answersQuery = mysqli_query($conn, $answersSql);
-                        if (!$answersQuery) {die ('SQL Error: ' . mysqli_error($conn));}
-
-                        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
-                        while ($answerRow = mysqli_fetch_array($answersQuery)) {
-                            echo "<tr>
-                                    <td>".$answerRow['user_name']."</td>
-                                    <td>".$answerRow['score']."</td>
-                                    <td>".
-                                        bcdiv(
-                                            bcsub(
-                                                mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM answers"))['timeAQ'.(
-                                                mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]-1)],
-                                                mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM answers"))['startTime']
-                                            ),'1000',2
-                                        )."s</td>
-                                 </tr>";
-                            }
-                        mysqli_close($conn);*/
                     ?>
                     </tbody>
                 </table>
@@ -380,7 +361,7 @@
                 if (!$startTimeScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}
                 //echo bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2);
                 echo date("h:m:s", (int)bcdiv(bcsub(mysqli_fetch_array($totalTimeScoreQuery)[0],mysqli_fetch_array($startTimeScoreQuery)[0]),'1000',2))." s";
-                mysqli_close($conn);
+                //mysqli_close($conn);
             ?>";
 
         }
