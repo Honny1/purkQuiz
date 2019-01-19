@@ -47,22 +47,20 @@ function saveAnswersToDatabase() {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        // var date = new Date();
-        // var ms = date.getTime();
-        //var newMs = ms - 1540194340000;
         xmlhttp.open("GET","controlDatabase/saveUser.php?userAnswers=" + 
             <?php 
                 if (isset($_GET["username"])){
                     echo "\"".$_GET['username']."\"";
                 }else{
-                    //echo "\"user\"+newMs";
                     echo "\"Player\"";
                 }
             ?> + "," + userAnswers, true);
         xmlhttp.send();
 }
+
 var check = true;
 var timerId;
+
 function progressCountdown(timeleft) {
     var elem = document.getElementById('countdown');
     var timerId = setInterval(countdown, 1000);
@@ -90,12 +88,15 @@ function progressCountdown(timeleft) {
     }
 
 }
+
 function stopCountdown() {
     check = false;
 }   
+
 function end(){
     document.getElementById('NaN').click();
 }
+
 </script>
 </head>
 <body style="background-color: transparent;">

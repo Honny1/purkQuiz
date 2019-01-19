@@ -63,6 +63,12 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
 <head scrolling="no">
     <title>Results of Quiz</title>
     <meta http-equiv="refresh" content="15;url=">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#2e3136">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#2e3136">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2e3136">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
@@ -202,7 +208,7 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
                             <th style="text-align: center; min-width: 60px;">Time</th>
                             <?php
                                 foreach(getIdOfActiveQuestions() as $i){
-                                    echo ("<th style='text-align: center; '>AQ$i</th>");
+                                        echo ("<th style='text-align: center; '>Q$i</th>");
                                 }
                             ?> 
                         </tr>
