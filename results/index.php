@@ -204,8 +204,9 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
                     <thead>
                         <tr>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center; min-width:  30px;">Try</th>
                             <th style="text-align: center; min-width: 110px;">Score</th>
-                            <th style="text-align: center; min-width: 60px;">Time</th>
+                            <th style="text-align: center; min-width:  60px;">Time</th>
                             <?php
                                 foreach(getIdOfActiveQuestions() as $i){
                                         echo ("<th style='text-align: center; '>Q$i</th>");
@@ -236,7 +237,8 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
                                     <td>".$answerRow['name']."</td>
-                                    <td>". round(getScore($answerRow['name']))."</td>
+                                    <td>".$answerRow['try']."</td>
+                                    <td>".round(getScore($answerRow['name'], $answerRow['try']))."</td>
                                     <td>".bcdiv(bcsub($answerRow['timeAQ'.((string)getIdOfLastQuestion())],$answerRow['startTime']),'1000',2)." s</td>";
                             foreach($activeQuestionsArray as $i){
                                 print_r("<td style='".styleTd($answerRow["AQ$i"], $i)."'>".$answerRow["AQ$i"]."</td>");
@@ -254,6 +256,7 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
                     <thead>
                         <tr>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center; min-width:  30px;">Try</th>
                             <th style="text-align: center; min-width: 110px;">Score</th>
                             <th style="text-align: center;">Time</th>
                         </tr>
@@ -270,8 +273,8 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
                         while ($answerRow = mysqli_fetch_array($answersQuery)) {
                             echo "<tr>
                                     <td>".$answerRow['user_name']."</td>
+                                    <td>".$answerRow['try']."</td>
                                     <td>".$answerRow['score']."</td>
-                                    <!--<td>".floor(((float)$answerRow['solutionTime'] /1000)/60)." s</td>-->
                                     <td>".bcdiv($answerRow['solutionTime'],'1000',2)." s</td>
                                  </tr>";
                             }

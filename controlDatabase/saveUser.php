@@ -54,7 +54,7 @@
 
   if ($conn->query($sql) === TRUE) {
     $score2 = getScore($name, $countOfTries);
-    saveToRank($name,$score2);
+    saveToRank($name, $countOfTries, $score2);
     echo " <div style='width: 280px; left: 28%; right: 28%;' class='gamePin'>
             <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
               <h2>Name:</h2>
