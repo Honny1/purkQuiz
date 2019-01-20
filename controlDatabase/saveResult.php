@@ -1,6 +1,6 @@
 <?php
 	//save name, score and time to table rank for calulate user global position 
-	function saveToRank($name,$score){
+	function saveToRank($name, $countOfTries, $score){
 		include 'dbConnect.php';
 		include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getTime.php';
 
@@ -9,7 +9,7 @@
 		$time = mysqli_real_escape_string($conn,round(microtime(true) * 1000));
 		$solutionTime = mysqli_real_escape_string($conn,getSolutionTime($name));
 
-		$sql = "INSERT INTO rank (user_name,saveTime,score,solutionTime) VALUES ('$name','$time','$score','$solutionTime')";
+		$sql = "INSERT INTO rank (user_name, try, saveTime, score, solutionTime) VALUES ('$name', '$countOfTries', '$time', '$score', '$solutionTime')";
 
 		if ($conn->query($sql) === TRUE) {
 		
