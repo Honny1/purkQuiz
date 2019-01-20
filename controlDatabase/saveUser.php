@@ -9,20 +9,11 @@
 
   $userAnswersSplit = explode(",", $userAnswers);
   $name = mysqli_real_escape_string($conn, $userAnswersSplit[0]);
+
   $sqlForCountOfTries = "SELECT id FROM answers WHERE name LIKE '$name%'";
-  $result1 = mysqli_query($conn,$sqlForCountOfTries);
-  $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
-      
-  $countOfTries = mysqli_num_rows($result1);
+  $resultForCountOfTries = mysqli_query($conn,$sqlForCountOfTries);
+  $countOfTries = mysqli_num_rows($resultForCountOfTries);
     
- /* if($countOfTries > 0) {
-      $name.="_pokus". $countOfTries;
-  }else{
-      $name.="_pokus0";
-  }*/
-
-  $name = mysqli_real_escape_string($conn, $name);
-
   $sql = "INSERT INTO answers ( name, try, startTime";
   $userScore = 0;
 
@@ -69,4 +60,5 @@
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
   mysqli_close($conn);
-?>
+    ?>
+

@@ -20,7 +20,14 @@ function getNewQuestionFromQuestionSet(str) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","controlDatabase/showQuestion.php?indexOfQuestion="+str,true);
+        xmlhttp.open("GET","controlDatabase/showQuestion.php?indexOfQuestion="+str+"&name="+
+            <?php 
+                if (isset($_GET["username"])){
+                    echo "\"".$_GET['username']."\"";
+                }else{
+                    echo "\"Player\"";
+                }
+            ?>,true);
         xmlhttp.send();
     }
 

@@ -5,6 +5,23 @@
 </head>
 <body>
 <?php
+    function canContinueToQuiz($name){
+        global $conn;
+        $sqlForCountOfTries = "SELECT id FROM answers WHERE name LIKE '$name%'";
+        $resultForCountOfTries = mysqli_query($conn,$sqlForCountOfTries);
+        $countOfTries = mysqli_num_rows($resultForCountOfTries);
+
+        if ($countOfTries > 3){
+            die("<h2 style=\"color: red; \">Vycerpal jsi vsechny svoje pokusy kamo!</h2>
+                <a href=\"/\">Go to home</a>");
+        }
+    }
+
+    if (isset($_GET["name"])){
+        canContinueToQuiz($_GET["name"]);
+    }else{
+        header("Location: /");
+    }
     if (isset($_GET["indexOfQuestion"])) {
         $indexOfQuestion = (int)$_GET["indexOfQuestion"];
     }else{
