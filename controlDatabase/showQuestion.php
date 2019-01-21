@@ -7,7 +7,6 @@
 <?php
     function canContinueToQuiz($name){
         global $conn;
-<<<<<<< HEAD
         $sqlForCountOfTries = "SELECT id FROM answers WHERE name LIKE '$name'";
         $resultForCountOfTries = mysqli_query($conn,$sqlForCountOfTries);
         $countOfTries = mysqli_num_rows($resultForCountOfTries);
@@ -17,17 +16,6 @@
                     <h2 style=\"color: red; \">You've reach a maximal count of tries!</h2>
                     <a href=\"/\">Go to home</a>
                 </div>");
-=======
-        $sqlForCountOfTries = "SELECT id FROM answers WHERE name LIKE '$name%'";
-        $resultForCountOfTries = mysqli_query($conn,$sqlForCountOfTries);
-        $countOfTries = mysqli_num_rows($resultForCountOfTries);
-
-        if ($countOfTries > 3){
-            die("<div style=\"background-color: rgba(255, 255, 255, 0.75);\" class=\"gamePin mui-panel\">
-                    <h2 style=\"color: red; \">Vycerpal jsi vsechny svoje pokusy kamo!</h2>
-                    <a href=\"/\">Go to home</a>
-                 </div>");
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
         }
     }
 
@@ -88,39 +76,23 @@
                     if ($questionRow["answer1"] != "") {
                         echo "
                     <tr>
-<<<<<<< HEAD
-                        <td><button name='buttonAnswer' style='font-size: 200%;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='A' onClick='stopCountdown();saveUserAnswers(this.id);getNewQuestionFromQuestionSet(this.value);progressCountdown(10)'>".$questionRow['answer1']."</button></td>
-=======
                         <td><button name='buttonAnswer' style='font-size: 200%;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='A' onClick='getNewQuestionFromQuestionSet(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer1']."</button></td>
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
                     </tr>";
                     }if ($questionRow["answer2"] != "") {
                         echo "
                     <tr>
-<<<<<<< HEAD
-                        <td><button name='buttonAnswer' style='font-size: 200%; background-color: red; color: white;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='B' onClick='stopCountdown();saveUserAnswers(this.id);getNewQuestionFromQuestionSet(this.value);progressCountdown(10)'>".$questionRow['answer2']."</button></td>
-=======
                         <td><button name='buttonAnswer' style='font-size: 200%; background-color: red; color: white;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='B' onClick='getNewQuestionFromQuestionSet(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer2']."</button></td>
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
                     </tr>";
                     }if ($questionRow["answer3"] != "") {
                         echo "
                     <tr>
-<<<<<<< HEAD
-                        <td><button name='buttonAnswer' style='font-size: 200%; background-color: yellow; color: black;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='C' onClick='stopCountdown();saveUserAnswers(this.id);getNewQuestionFromQuestionSet(this.value);progressCountdown(10)'>".$questionRow['answer3']."</button></td>
-=======
                         <td><button name='buttonAnswer' style='font-size: 200%; background-color: yellow; color: black;' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='C' onClick='getNewQuestionFromQuestionSet(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer3']."</button></td>
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
                     </tr>
                     ";
                     }if ($questionRow["answer4"] != "") {
                         echo "
                     <tr>
-<<<<<<< HEAD
-                        <td><button  name='buttonAnswer' style='font-size: 200%; background-color: black; color: white; ' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='D' onClick='stopCountdown();saveUserAnswers(this.id);getNewQuestionFromQuestionSet(this.value);progressCountdown(10)'>".$questionRow['answer4']."</button></td>
-=======
                         <td><button  name='buttonAnswer' style='font-size: 200%; background-color: black; color: white; ' class='inGameButton mui-btn mui-btn--primary mui-btn--raised' value=" . $indexOfNextQuestion . " id='D' onClick='getNewQuestionFromQuestionSet(this.value);saveUserAnswers(this.id);stopCountdown();progressCountdown(10)'>".$questionRow['answer4']."</button></td>
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
                     </tr>";
                     }echo "
                 </table>

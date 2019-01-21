@@ -108,17 +108,6 @@ function end(){
 </head>
 <body style="background-color: transparent;">
     <center>
-<<<<<<< HEAD
-        <div id="txtHint">
-            <div class='gamePin'>
-                <div style='background-color: rgba(255, 255, 255, 0.75);' class='mui-panel'>
-                        <h1>Začít hrát</h1>
-                        <h3>Stikni tlačítko a hrej!</h3>
-                        <h2 style="color: red;">Pozor!</h2> 
-                        <p style="font-size: 130%;" >Na každnou otázku máš PŘIBLIŽNĚ 10s.</p>
-                        <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value='0' onClick="getNewQuestionFromQuestionSet(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
-                        </div>
-=======
         <canvas id="canvasForMatrix" scrolling="no"></canvas>
         <div id="txtHint">
             <div class="gamePin">
@@ -128,14 +117,11 @@ function end(){
                     <h2 style="color: red;">Pozor!</h2> 
                     <p style="font-size: 130%;" >Na každnou otázku máš PŘIBLIŽNĚ 10s.</p>
                     <button style='font-size: 160%;' id='play' class='startStopButtton mui-btn mui-btn--primary mui-btn--raised' name="buttonAnswer" value='0' onClick="getNewQuestionFromQuestionSet(this.value);saveUserAnswers(0);progressCountdown(10)">Play</button>
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
                     </div>
                 </div>
             </div>
         </div>
     </center>
-<<<<<<< HEAD
-=======
     <script>
         var c = document.getElementById("canvasForMatrix");
         var ctx = c.getContext("2d");
@@ -188,5 +174,4 @@ function end(){
 
         setInterval(draw, 33);
     </script>
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
-<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';
+<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';?>

@@ -60,9 +60,4 @@
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
   mysqli_close($conn);
-<<<<<<< HEAD
 ?>
-=======
-    ?>
-
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db

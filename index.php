@@ -1,10 +1,6 @@
 <?php
    include(realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php');
-<<<<<<< HEAD
-   $error="";
-=======
    $error = "";
->>>>>>> 426a9bcc2c3bd9861252f857c5ca1e758ec2d0db
    
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       
