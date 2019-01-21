@@ -12,8 +12,10 @@
         $countOfTries = mysqli_num_rows($resultForCountOfTries);
 
         if ($countOfTries > 3){
-            die("<h2 style=\"color: red; \">Vycerpal jsi vsechny svoje pokusy kamo!</h2>
-                <a href=\"/\">Go to home</a>");
+            die("<div style=\"background-color: rgba(255, 255, 255, 0.75);\" class=\"gamePin mui-panel\">
+                    <h2 style=\"color: red; \">Vycerpal jsi vsechny svoje pokusy kamo!</h2>
+                    <a href=\"/\">Go to home</a>
+                 </div>");
         }
     }
 
