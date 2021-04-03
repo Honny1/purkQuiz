@@ -1,6 +1,6 @@
 <?php
     // This file return questions and answers
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
 ?>
 </head>
 <body>
@@ -14,7 +14,7 @@
         if ($countOfTries >= 3){
             die("<div class='gamePin mui-panel' style='background-color: rgba(255, 255, 255, 0.75);'>
                     <h2 style=\"color: red; \">You've reach a maximal count of tries!</h2>
-                    <a href=\"/\">Go to home</a>
+                    <a href=\"./index.php\">Go to home</a>
                 </div>");
         }
     }

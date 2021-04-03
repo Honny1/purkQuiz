@@ -25,37 +25,37 @@
 <body>
   <?php 
 
-  //include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
+  //include './htmlParts/header.php';
 
   function getData(){
     // this method return data for graph
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
 
-    $date0 =round(microtime(true) * 1000) - 900000;
-    $date1 =round(microtime(true) * 1000) - (900000*2);
-    $date2 =round(microtime(true) * 1000) - (900000*3);
-    $date3 =round(microtime(true) * 1000) - (900000*4);
-    $date4 =round(microtime(true) * 1000) - (900000*5);
-    $date5 =round(microtime(true) * 1000) - (900000*6);
-    $date6 =round(microtime(true) * 1000) - (900000*7);
-    $date7 =round(microtime(true) * 1000) - (900000*8);
+    $date0 = round(microtime(true) * 1000) - 900000;
+    $date1 = round(microtime(true) * 1000) - (900000*2);
+    $date2 = round(microtime(true) * 1000) - (900000*3);
+    $date3 = round(microtime(true) * 1000) - (900000*4);
+    $date4 = round(microtime(true) * 1000) - (900000*5);
+    $date5 = round(microtime(true) * 1000) - (900000*6);
+    $date6 = round(microtime(true) * 1000) - (900000*7);
+    $date7 = round(microtime(true) * 1000) - (900000*8);
 
-    $maxScore0=0;
-    $count0=0;
-    $maxScore1=0;
-    $count1=0;
-    $maxScore2=0;
-    $count2=0;
-    $maxScore3=0;
-    $count3=0;
-    $maxScore4=0;
-    $count4=0;
-    $maxScore5=0;
-    $count5=0;
-    $maxScore6=0;
-    $count6=0;
-    $maxScore7=0;
-    $count7=0;
+    $maxScore0 = 0;
+    $count0 = 0;
+    $maxScore1 = 0;
+    $count1 = 0;
+    $maxScore2 = 0;
+    $count2 = 0;
+    $maxScore3 = 0;
+    $count3 = 0;
+    $maxScore4 = 0;
+    $count4 = 0;
+    $maxScore5 = 0;
+    $count5 = 0;
+    $maxScore6 = 0;
+    $count6 = 0;
+    $maxScore7 = 0;
+    $count7 = 0;
 
     $answersSql = "SELECT * FROM rank";
     $answersQuery = mysqli_query($conn, $answersSql);

@@ -1,5 +1,5 @@
 
-	<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php'; ?>
+	<?php include '../htmlParts/header.php'; ?>
 	<title>Admin - Quiz</title>
 	<meta property="og:title" content="Admin - Quiz" />
 	<meta property="og:type" content="website" />
@@ -26,4 +26,4 @@
 			</div>
 		</center>
 	</div>
-<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';?>
+<?php include '../htmlParts/footer.php';?>

@@ -1,20 +1,19 @@
-
-    <?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php'; ?>
+    <?php include '../htmlParts/header.php'; ?>
     <title>Setup page - Quiz</title>
     <meta property="og:title" content="Setup page - Quiz" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://quiz.buchticka.eu/images/background.jpg" />
+    <meta property="og:image" content="../images/background.jpg" />
     <meta property="og:description" content="Here you can make Quiz working!" />
   
 </head>
-<body style="background-color: transparent;">
+<body style="background-color: transparent; ">
     <div class="dashboardContent" >
         <center>
             <div style="background-color: rgba(255, 255, 255, 0.75);" class="mui-panel">
                 <h1>Setup of Quiz</h1>
                 <h2>Welcome</h2>
                 <?php
-                    include realpath($_SERVER['DOCUMENT_ROOT']).'/setup/dbCredentials.php';
+                    include '../dbCredentials.php';
                     // Try to create database
                     try{
                         // Create connection to database server without setting database and check connection
@@ -76,7 +75,7 @@
                             // If it has a semicolon at the end, it's the end of the query
                             if (substr(trim($line), -1, 1) == ';'){
                                 // Perform the query
-                                $conn->query($templine) or echo "<div style='background-color: rgba(255, 220, 220, 0.75); '> Error performing query '<strong style='color: red; '>" . $templine . "': " . $conn->error . "<br /><br /></strong></div>";
+                                $conn->query($templine) or print_r("<div style='background-color: rgba(255, 220, 220, 0.75); '> Error performing query '<strong style='color: red; '>" . $templine . "': " . $conn->error . "<br /><br /></strong></div>");
                             
                                 // Reset temp variable to empty
                                 $templine = '';
@@ -94,4 +93,4 @@
             </div>
         </center>
     </div>
-<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';?>
+<?php include '../htmlParts/footer.php';?>

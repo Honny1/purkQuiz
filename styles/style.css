@@ -1,10 +1,10 @@
-@font-face{font-family: Trebuchet MS; src: url('/fonts/TrebuchetMS.ttf');}
+@font-face{font-family: Trebuchet MS; src: url('../fonts/TrebuchetMS.ttf');}
   * {
     margin: 0; padding: 0;
 }
 html{
     height: 100%;
-    background: url("/images/background.jpg");
+    background: url("../images/background.jpg");
     background-color: rgba(1, 225, 225, 1);    /*rgba(128,255,0, 0.6);*/
     background-position: center;
     /*background-repeat: no-repeat;*/

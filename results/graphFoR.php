@@ -25,9 +25,9 @@
 <body>
   <?php 
 
-  //include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
+  //include './htmlParts/header.php';
   function getData($answer="A"){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
     $countToReturn = 0;
 
     // Get active settings
@@ -67,16 +67,16 @@
    */
 
   function getColorA($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(255,  80,  80, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);//255,  99, 132
   }function getColorB($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(225, 151,  76, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);// 54, 162, 235
   }function getColorC($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(204, 194,  16, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);//255, 206,  86
   }function getColorD($opacity='0.4'){
-    include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+    include '../controlDatabase/dbConnect.php';
     return  str_repeat ("'rgba(132, 186,  91, ".$opacity.")',", mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM settings"))["countOfActiveQuestions"]);// 75, 192, 192
   }
 
@@ -89,7 +89,7 @@
       "type":"bar",
       "data":{
         "labels":[<?php 
-          include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+          include '../controlDatabase/dbConnect.php';
           // Get active settings
           $settingsQuery = mysqli_query($conn, "SELECT * FROM settings WHERE `id` = 1; ");
           if (!$settingsQuery) {die ('SQL Error: ' . mysqli_error($conn));}

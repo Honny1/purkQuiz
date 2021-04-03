@@ -1,6 +1,6 @@
 <?php
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php';
+	include '../controlDatabase/dbConnect.php';
+	include '../htmlParts/header.php';
 
 	echo "
 	<title>Change Settings - Admin Quiz</title>
@@ -96,5 +96,5 @@ echo "
 		</center>
 	</div>";
 /*S1f0n */
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';
+	include '../htmlParts/footer.php';
 ?>

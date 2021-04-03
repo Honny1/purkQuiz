@@ -2,7 +2,7 @@
 	//save name, score and time to table rank for calulate user global position 
 	function saveToRank($name, $countOfTries, $score){
 		include 'dbConnect.php';
-		include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getTime.php';
+		include '../calcResults/getTime.php';
 
 		$name = mysqli_real_escape_string($conn,$name);
 		$score = mysqli_real_escape_string($conn,$score);

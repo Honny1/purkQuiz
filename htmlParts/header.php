@@ -15,10 +15,10 @@ $themeColor = "#01e1e1";
     <meta name="apple-mobile-web-app-status-bar-style" content="<?php print($themeColor); ?> ">
 
     <!-- load STYLES -->
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link href="/styles/style.css"   rel="stylesheet"    type="text/css" />
-    <link href="/styles/mui.css"     rel="stylesheet"    type="text/css" />
-    <script src="/js/mui.min.js"></script>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="styles/style.css"   rel="stylesheet"    type="text/css" />
+    <link href="styles/mui.css"     rel="stylesheet"    type="text/css" />
+    <script src="js/mui.min.js"></script>
     <!-- SHARING -->
     <meta property="og:url" content=<?php echo '"'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'].'"'; ?>/>
     

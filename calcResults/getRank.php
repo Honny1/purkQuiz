@@ -1,7 +1,7 @@
 <?php
 //return your global position 
 function getRank($name){
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+	include '../controlDatabase/dbConnect.php';
 	
 	$count=0;
  	$rankSql = "SELECT * FROM rank ORDER BY score DESC";

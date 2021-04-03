@@ -1,4 +1,4 @@
-<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/header.php' ?>
+<?php include './htmlParts/header.php' ?>
 <title>Quiz</title>
 <meta property="og:title" content="Quiz" />
 <meta property="og:type" content="website" />
@@ -174,4 +174,4 @@ function end(){
 
         setInterval(draw, 33);
     </script>
-<?php include realpath($_SERVER['DOCUMENT_ROOT']).'/htmlParts/footer.php';?>
+<?php include './htmlParts/footer.php';?>

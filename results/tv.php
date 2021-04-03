@@ -1,6 +1,6 @@
 <?php
-include realpath($_SERVER['DOCUMENT_ROOT']).'/calcResults/getScore.php';
-include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+include '../calcResults/getScore.php';
+include '../controlDatabase/dbConnect.php';
 
 function getIdOfActiveQuestions(){
     // This function return array of IDs question in active questionSet
@@ -71,9 +71,9 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
     <meta name="apple-mobile-web-app-status-bar-style" content="#2e3136">
     <meta property="og:title" content="Results of Quiz" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
+    <meta property="og:image" content="//<?php echo $_SERVER['HTTP_HOST']; ?>/images/background.jpg" />
     <meta property="og:description" content="Results of Quiz about IT" />
-    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
 
     <style type="text/css">
         html{
@@ -263,7 +263,7 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
                     </thead>
                     <tbody>
                     <?php 
-                        include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+                        include '../controlDatabase/dbConnect.php';
                         
                         $answersSql = "SELECT * FROM rank ORDER BY score DESC LIMIT 10";
                         $answersQuery = mysqli_query($conn, $answersSql);
@@ -332,7 +332,7 @@ function styleTd($userAnswer='A', $numberOfQuestion=1){
         }
 
         function getStatisticTable() {
-            <?php include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php'; ?>
+            <?php include '../controlDatabase/dbConnect.php'; ?>
             document.getElementById("max").innerHTML =  "<?php
                 $maxScoreQuery = mysqli_query($conn, "SELECT MAX(`score`) FROM rank");
                 if (!$maxScoreQuery) {die ('SQL Error: ' . mysqli_error($conn));}

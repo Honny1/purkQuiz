@@ -10,7 +10,7 @@
 
     //  return score
     function getScore($name, $countOfTries){
-        include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+        include '../controlDatabase/dbConnect.php';
         $userScore = 0;
 
         // Get active settings

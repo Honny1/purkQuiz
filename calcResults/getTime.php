@@ -1,7 +1,7 @@
 <?php
 //return your solution time
 function getSolutionTime($name){
-	include realpath($_SERVER['DOCUMENT_ROOT']).'/controlDatabase/dbConnect.php';
+	include '../controlDatabase/dbConnect.php';
 
  	$sql = "SELECT * FROM answers WHERE name = '$name'";
 	$result = mysqli_query($conn,$sql);
